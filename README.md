@@ -13,7 +13,7 @@
 
 Install this package through [Composer](https://getcomposer.org/).
 
-Edit your project's `composer.json` file to require `longman/laravel-multilang`
+Edit your project's `composer.json` file to require `php-telegram-bot/laravel`
 
 Create *composer.json* file:
 ```json

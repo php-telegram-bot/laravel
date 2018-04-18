@@ -4,9 +4,9 @@ return [
     /**
      * Bot configuration
      */
-    'bot' => [
-        'name'    => env('PHP_TELEGRAM_BOT_NAME', 'Test Name'),
-        'api_key' => env('PHP_TELEGRAM_BOT_API_KEY', '489567508:AAEJgd80WMYbl7NisJYpkWCJLt2o_0RkpXs'),
+    'bot'      => [
+        'name'    => env('PHP_TELEGRAM_BOT_NAME', ''),
+        'api_key' => env('PHP_TELEGRAM_BOT_API_KEY', ''),
     ],
 
     /**
@@ -27,7 +27,7 @@ return [
         ],
     ],
 
-    'admins' => [
+    'admins'  => [
         // Admin ids
     ],
 

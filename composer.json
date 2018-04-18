@@ -1,5 +1,5 @@
 {
-    "name": "php-telegram-bot/laravel",
+    "name": "php-telegram/laravel",
     "type": "library",
     "description": "Package to integrate PHP Telegram Bot library in Laravel 5.x",
     "keywords": [

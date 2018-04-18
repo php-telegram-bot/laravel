@@ -32,13 +32,17 @@ class PhpTelegramBotServiceProvider extends ServiceProvider
         // Publish config files
         $this->publishes([
             __DIR__ . '/../config/config.php' => config_path('phptelegrambot.php'),
-        ]);
+        ], 'config');
 
         // Append the default settings
         $this->mergeConfigFrom(
             __DIR__ . '/../config/config.php',
             'phptelegrambot'
         );
+
+        $this->publishes([
+            __DIR__.'/../database/migrations/' => database_path('migrations')
+        ], 'migrations');
     }
 
     /**
@@ -51,7 +55,39 @@ class PhpTelegramBotServiceProvider extends ServiceProvider
         $this->app->bind(PhpTelegramBotContract::class, function (Application $app) {
             $config = $app['config']->get('phptelegrambot');
 
-            $bot = new PhpTelegramBot($config['api_key'], ! empty($config['name']) ? $config['name'] : []);
+            $bot = new PhpTelegramBot($config['bot']['api_key'], ! empty($config['bot']['name']) ? $config['bot']['name'] : '');
+
+            // Add commands if paths are given
+            if (! empty($config['commands']['paths'])) {
+                $bot->addCommandsPaths($config['commands']['paths']);
+            }
+
+            // Set command related configs
+            if (! empty($config['commands']['configs'])) {
+                foreach ($config['commands']['configs'] as $command_name => $command_config) {
+                    $bot->setCommandConfig($command_name, $command_config);
+                }
+            }
+
+            // Set database connection
+            if ($config['database']['enabled'] === true) {
+                /** @var \Illuminate\Database\Connection $connection */
+                $connection = $app['db']->connection($config['database']['connection']);
+                $bot->enableExternalMySql($connection->getPdo());
+            }
+
+            // Enable admins if provided
+            if (! empty($config['admins'])) {
+                $bot->enableAdmins($config['admins']);
+            }
+
+            // Set paths
+            if (! empty($config['download_path'])) {
+                $bot->setDownloadPath($config['download_path']);
+            }
+            if (! empty($config['upload_path'])) {
+                $bot->setUploadPath($config['upload_path']);
+            }
 
             return $bot;
         });

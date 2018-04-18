@@ -47,6 +47,8 @@ After run migration command
 
     php artisan migrate
 
+In the config you have to specify Telegram API KEY
+
 ## Usage
 
 You can inject `PhpTelegramBot\Laravel\PhpTelegramBotContract` in anywhere and use bot instance

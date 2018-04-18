@@ -1,0 +1,60 @@
+{
+    "name": "php-telegram-bot/laravel",
+    "type": "library",
+    "description": "Package to integrate PHP Telegram Bot library in Laravel 5.x",
+    "keywords": [
+        "laravel",
+        "telegram",
+        "bot"
+    ],
+    "license": "MIT",
+    "homepage": "https://github.com/php-telegram-bot/laravel",
+    "support": {
+        "issues": "https://github.com/php-telegram-bot/laravel/issues",
+        "source": "https://github.com/php-telegram-bot/laravel"
+    },
+    "authors": [
+        {
+            "name": "Avtandil Kikabidze aka LONGMAN",
+            "email": "akalongman@gmail.com",
+            "homepage": "http://longman.me",
+            "role": "Maintainer, Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.5.9",
+        "illuminate/database": "5.*",
+        "illuminate/http": "5.*",
+        "illuminate/support": "5.*",
+        "longman/telegram-bot": "^0.53.0"
+    },
+    "require-dev": {
+        "mockery/mockery": "0.9.*",
+        "phpunit/phpunit": "~4.8|~5.7",
+        "longman/php-code-style": "^1.0",
+        "graham-campbell/testbench": "^3.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "PhpTelegramBot\\Laravel\\": "src/Laravel"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "PhpTelegramBot\\Laravel\\PhpTelegramBotServiceProvider"
+            ],
+            "aliases": {
+                "PhpTelegramBot": "PhpTelegramBot\\Laravel\\Facades\\PhpTelegramBot"
+            }
+        }
+    }
+}

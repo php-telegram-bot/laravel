@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ruleset name="Project code style checker config">
+    <rule ref="./vendor/longman/php-code-style/longish.phpcs.xml">
+
+    </rule>
+
+</ruleset>

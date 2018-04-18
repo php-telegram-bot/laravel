@@ -10,6 +10,9 @@
 
 namespace PhpTelegramBot\Laravel;
 
+/**
+ * @mixin \Longman\TelegramBot\Telegram
+ */
 interface PhpTelegramBotContract
 {
 

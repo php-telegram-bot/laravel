@@ -46,6 +46,23 @@
     "config": {
         "sort-packages": true
     },
+    "scripts": {
+        "test": [
+            "vendor/bin/phpunit"
+        ],
+        "coverage-text": [
+            "vendor/bin/phpunit --coverage-text --colors=never"
+        ],
+        "coverage-html": [
+            "vendor/bin/phpunit --coverage-html public/coverage"
+        ],
+        "phpcs": [
+            "vendor/bin/phpcs --standard=phpcs.xml -spn --encoding=utf-8 src/ tests/ --report-width=150"
+        ],
+        "phpcbf": [
+            "vendor/bin/phpcbf --standard=phpcs.xml -spn --encoding=utf-8 src/ tests/ --report-width=150"
+        ]
+    },
     "extra": {
         "laravel": {
             "providers": [

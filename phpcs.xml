@@ -3,5 +3,11 @@
     <rule ref="./vendor/longman/php-code-style/longish.phpcs.xml">
 
     </rule>
+    <rule ref="PSR1.Classes.ClassDeclaration.MissingNamespace">
+        <exclude-pattern>src/database/*</exclude-pattern>
+    </rule>
+    <rule ref="PSR1.Methods.CamelCapsMethodName.NotCamelCaps">
+        <exclude-pattern>tests/*</exclude-pattern>
+    </rule>
 
 </ruleset>

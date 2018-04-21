@@ -26,8 +26,10 @@ class CreateMessageTable extends Migration
             $table->bigInteger('reply_to_message')->unsigned()->nullable()->index('reply_to_message')->comment('Message that this message is reply to');
             $table->text('media_group_id', 65535)->nullable()->comment('The unique identifier of a media message group this message belongs to');
             $table->text('text', 65535)->nullable()->comment('For text messages, the actual UTF-8 text of the message max message length 4096 char utf8mb4');
-            $table->text('entities',
-                65535)->nullable()->comment('For text messages, special entities like usernames, URLs, bot commands, etc. that appear in the text');
+            $table->text(
+                'entities',
+                65535
+            )->nullable()->comment('For text messages, special entities like usernames, URLs, bot commands, etc. that appear in the text');
             $table->text('audio', 65535)->nullable()->comment('Audio object. Message is an audio file, information about the file');
             $table->text('document', 65535)->nullable()->comment('Document object. Message is a general file, information about the file');
             $table->text('photo', 65535)->nullable()->comment('Array of PhotoSize objects. Message is a photo, available sizes of the photo');
@@ -39,8 +41,10 @@ class CreateMessageTable extends Migration
             $table->text('location', 65535)->nullable()->comment('Location object. Message is a shared location, information about the location');
             $table->text('venue', 65535)->nullable()->comment('Venue object. Message is a Venue, information about the Venue');
             $table->text('caption', 65535)->nullable()->comment('For message with caption, the actual UTF-8 text of the caption');
-            $table->text('new_chat_members',
-                65535)->nullable()->comment('List of unique user identifiers, new member(s) were added to the group, information about them (one of these members may be the bot itself)');
+            $table->text(
+                'new_chat_members',
+                65535
+            )->nullable()->comment('List of unique user identifiers, new member(s) were added to the group, information about them (one of these members may be the bot itself)');
             $table->bigInteger('left_chat_member')->nullable()->index('left_chat_member')->comment('Unique user identifier, a member was removed from the group, information about them (this member may be the bot itself)');
             $table->char('new_chat_title')->nullable()->comment('A chat title was changed to this value');
             $table->text('new_chat_photo', 65535)->nullable()->comment('Array of PhotoSize objects. A chat photo was change to this value');

@@ -32,7 +32,7 @@ Create *composer.json* file:
     "name": "yourproject/yourproject",
     "type": "project",
     "require": {
-        "php-telegram-bot/laravel": "~0.1"
+        "php-telegram-bot/laravel": "^1.0"
     }
 }
 ```
@@ -44,7 +44,7 @@ And run composer update
 
 Copy the package config and migrations to your project with the publish command:
 
-    php artisan vendor:publish --provider="PhpTelegramBot\Laravel\PhpTelegramBotServiceProvider"
+    php artisan vendor:publish --provider="PhpTelegramBot\Laravel\ServiceProvider"
 
 After run migration command
 

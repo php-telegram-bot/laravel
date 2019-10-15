@@ -12,10 +12,9 @@ declare(strict_types=1);
  */
 namespace PhpTelegramBot\Laravel;
 
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\ServiceProvider as LaravelServiceProvider;
 
-class PhpTelegramBotServiceProvider extends ServiceProvider
+class ServiceProvider extends LaravelServiceProvider
 {
     /**
      * Indicates if loading of the provider is deferred.

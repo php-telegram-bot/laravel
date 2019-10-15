@@ -54,7 +54,7 @@ class PhpTelegramBotServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(PhpTelegramBotContract::class, static function (Application $app) {
+        $this->app->bind(PhpTelegramBotContract::class, static function ($app) {
             $config = $app['config']->get('phptelegrambot');
 
             $bot = new PhpTelegramBot($config['bot']['api_key'], ! empty($config['bot']['name']) ? $config['bot']['name'] : '');

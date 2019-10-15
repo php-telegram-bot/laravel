@@ -1,4 +1,4 @@
-# Telegram Bot Package for Laravel 5.x
+# Telegram Bot Package for Laravel 6.x
 
 [![Build Status](https://travis-ci.org/php-telegram-bot/laravel.svg?branch=master)](https://travis-ci.org/php-telegram-bot/laravel)
 [![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/php-telegram-bot/laravel/master.svg?style=flat-square)](https://scrutinizer-ci.com/g/php-telegram-bot/laravel/?b=master)
@@ -42,17 +42,9 @@ And run composer update
 
     composer require php-telegram-bot/laravel
 
-In Laravel 5.5 the service provider will automatically get registered. 
-In older versions of the framework just add the service provider in `config/app.php` file:
-
-```php
-PhpTelegramBot\Laravel\PhpTelegramBotServiceProvider::class,
-```
-
 Copy the package config and migrations to your project with the publish command:
 
     php artisan vendor:publish --provider="PhpTelegramBot\Laravel\PhpTelegramBotServiceProvider"
-
 
 After run migration command
 
@@ -74,16 +66,17 @@ use PhpTelegramBot\Laravel\PhpTelegramBotContract;
 
 class CustomController extends Controller
 {
-    public function handle(PhpTelegramBotContract $telegram_bot)
+    public function handle(PhpTelegramBotContract $telegramBot)
     {
         // Call handle method
-        $telegram_bot->handle();
+        $telegramBot->handle();
         
         // Or set webhook 
-        $telegram_bot->setWebhook($hook_url);
+        $hookUrl = 'https://hook.url';
+        $telegramBot->setWebhook($hookUrl);
         
         // Or handle telegram getUpdates request
-        $telegram_bot->handleGetUpdates();
+        $telegramBot->handleGetUpdates();
     }
 }
 

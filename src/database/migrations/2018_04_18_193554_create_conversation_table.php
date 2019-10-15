@@ -1,19 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
 class CreateConversationTable extends Migration
 {
-
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
-        Schema::create('conversation', function (Blueprint $table) {
+        Schema::create('conversation', static function (Blueprint $table) {
             $table->bigInteger('id', true)->unsigned()->comment('Unique identifier for this entry');
             $table->bigInteger('user_id')->nullable()->index('user_id')->comment('Unique user identifier');
             $table->bigInteger('chat_id')->nullable()->index('chat_id')->comment('Unique user or chat identifier');
@@ -24,14 +20,8 @@ class CreateConversationTable extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::drop('conversation');
     }
-
 }

@@ -1,19 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
 class CreateChatTable extends Migration
 {
-
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
-        Schema::create('chat', function (Blueprint $table) {
+        Schema::create('chat', static function (Blueprint $table) {
             $table->bigInteger('id')->primary()->comment('Unique user or chat identifier');
             $table->enum('type', ['private', 'group', 'supergroup', 'channel'])->comment('Chat type, either private, group, supergroup or channel');
             $table->char('title')->nullable()->default('')->comment('Chat (group) title, is null if chat type is private');
@@ -24,14 +20,8 @@ class CreateChatTable extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::drop('chat');
     }
-
 }

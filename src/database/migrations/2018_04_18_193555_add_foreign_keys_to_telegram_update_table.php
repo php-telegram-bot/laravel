@@ -1,19 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
 class AddForeignKeysToTelegramUpdateTable extends Migration
 {
-
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
-        Schema::table('telegram_update', function (Blueprint $table) {
+        Schema::table('telegram_update', static function (Blueprint $table) {
             $table->foreign('chat_id', 'telegram_update_ibfk_1')->references('chat_id')->on('message')->onUpdate('RESTRICT')->onDelete('RESTRICT');
             $table->foreign('inline_query_id', 'telegram_update_ibfk_2')->references('id')->on('inline_query')->onUpdate('RESTRICT')->onDelete('RESTRICT');
             $table->foreign(
@@ -25,14 +21,9 @@ class AddForeignKeysToTelegramUpdateTable extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
-        Schema::table('telegram_update', function (Blueprint $table) {
+        Schema::table('telegram_update', static function (Blueprint $table) {
             $table->dropForeign('telegram_update_ibfk_1');
             $table->dropForeign('telegram_update_ibfk_2');
             $table->dropForeign('telegram_update_ibfk_3');
@@ -40,5 +31,4 @@ class AddForeignKeysToTelegramUpdateTable extends Migration
             $table->dropForeign('telegram_update_ibfk_5');
         });
     }
-
 }

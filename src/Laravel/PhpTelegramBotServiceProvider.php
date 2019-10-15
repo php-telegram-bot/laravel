@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /*
  * This file is part of the PhpTelegramBot/Laravel package.
  *
@@ -7,7 +10,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
 namespace PhpTelegramBot\Laravel;
 
 use Illuminate\Contracts\Foundation\Application;
@@ -41,7 +43,7 @@ class PhpTelegramBotServiceProvider extends ServiceProvider
         );
 
         $this->publishes([
-            __DIR__ . '/../database/migrations/' => database_path('migrations')
+            __DIR__ . '/../database/migrations/' => database_path('migrations'),
         ], 'migrations');
     }
 
@@ -52,7 +54,7 @@ class PhpTelegramBotServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(PhpTelegramBotContract::class, function (Application $app) {
+        $this->app->bind(PhpTelegramBotContract::class, static function (Application $app) {
             $config = $app['config']->get('phptelegrambot');
 
             $bot = new PhpTelegramBot($config['bot']['api_key'], ! empty($config['bot']['name']) ? $config['bot']['name'] : '');

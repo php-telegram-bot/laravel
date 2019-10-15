@@ -1,19 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
 class CreateTelegramUpdateTable extends Migration
 {
-
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
-        Schema::create('telegram_update', function (Blueprint $table) {
+        Schema::create('telegram_update', static function (Blueprint $table) {
             $table->bigInteger('id')->unsigned()->primary()->comment('Update\'s unique identifier');
             $table->bigInteger('chat_id')->nullable()->comment('Unique chat identifier');
             $table->bigInteger('message_id')->unsigned()->nullable()->comment('Unique message identifier');
@@ -25,14 +21,8 @@ class CreateTelegramUpdateTable extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::drop('telegram_update');
     }
-
 }

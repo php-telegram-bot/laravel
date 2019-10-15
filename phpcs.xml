@@ -10,4 +10,9 @@
         <exclude-pattern>tests/*</exclude-pattern>
     </rule>
 
+    <!-- Temp fix -->
+    <rule ref="PSR12.Files.FileHeader">
+        <exclude name="PSR12.Files.FileHeader.IncorrectOrder"/>
+    </rule>
+
 </ruleset>

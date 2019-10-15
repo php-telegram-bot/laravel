@@ -1,19 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
 class CreateChosenInlineResultTable extends Migration
 {
-
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
-        Schema::create('chosen_inline_result', function (Blueprint $table) {
+        Schema::create('chosen_inline_result', static function (Blueprint $table) {
             $table->bigInteger('id', true)->unsigned()->comment('Unique identifier for this entry');
             $table->char('result_id')->default('')->comment('Identifier for this result');
             $table->bigInteger('user_id')->nullable()->index('user_id')->comment('Unique user identifier');
@@ -24,14 +20,8 @@ class CreateChosenInlineResultTable extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::drop('chosen_inline_result');
     }
-
 }

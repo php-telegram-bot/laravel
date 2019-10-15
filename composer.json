@@ -1,7 +1,7 @@
 {
     "name": "php-telegram-bot/laravel",
     "type": "library",
-    "description": "Package to integrate PHP Telegram Bot library in Laravel 5.x",
+    "description": "Package to integrate PHP Telegram Bot library in Laravel 6.x",
     "keywords": [
         "laravel",
         "telegram",
@@ -22,9 +22,9 @@
         }
     ],
     "require": {
-        "php": ">=5.5.9",
-        "illuminate/database": "5.*|6.*",
-        "illuminate/support": "5.*|6.*",
+        "php": "^7.2",
+        "illuminate/database": "^6.0",
+        "illuminate/support": "^6.0",
         "longman/telegram-bot": "^0.60"
     },
     "require-dev": {

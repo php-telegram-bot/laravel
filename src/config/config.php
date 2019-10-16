@@ -16,7 +16,7 @@ return [
      */
     'database' => [
         'enabled'    => false,
-        'connection' => env('DB_CONNECTION', 'mysql'),
+        'connection' => env('PHP_TELEGRAM_BOT_DB_CONNECTION', 'mysql'),
     ],
 
     'commands' => [

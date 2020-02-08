@@ -20,7 +20,7 @@ class WebhookCommand extends Command
     {
         parent::__construct();
 
-        $this->$telegramBot = $telegramBot;
+        $this->telegramBot = $telegramBot;
     }
 
     public function handle()

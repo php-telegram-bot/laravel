@@ -28,7 +28,7 @@ class WebhookCommand extends Command
         $webhook = $this->argument('url');
         $delete = $this->option('delete');
 
-        if (!($webhook && $delete)) {
+        if (!($webhook || $delete)) {
             $this->error("Not enough arguments!");
             $this->error("php artisan telegram:webhook {url?} {--delete}");
             return;

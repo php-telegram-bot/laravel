@@ -10,8 +10,8 @@ use PhpTelegramBot\Laravel\PhpTelegramBotContract;
 
 class WebhookCommand extends Command
 {
-    protected $signature = 'telegram:webhook {url?}
-    {--delete : Force the operation to run when in production}';
+    protected $signature = 'telegram:webhook {webhook?}
+    {--delete : Delete webhook}';
 
     protected $description = 'Set or delete webhook for Telegram bot';
 
@@ -27,12 +27,12 @@ class WebhookCommand extends Command
 
     public function handle()
     {
-        $webhook = $this->argument('url');
+        $webhook = $this->argument('webhook');
         $delete = $this->option('delete');
 
         if (! ($webhook || $delete)) {
             $this->error('Not enough arguments!');
-            $this->error('php artisan telegram:webhook {url?} {--delete}');
+            $this->error('php artisan telegram:webhook {webhook?} {--delete}');
             return;
         }
 

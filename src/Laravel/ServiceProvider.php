@@ -96,10 +96,9 @@ class ServiceProvider extends LaravelServiceProvider
 
         if ($this->app->runningInConsole()) {
             $this->commands([
-                WebhookCommand::class
+                WebhookCommand::class,
             ]);
         }
-
     }
 
     /**

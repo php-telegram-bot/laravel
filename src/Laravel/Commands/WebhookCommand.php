@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpTelegramBot\Laravel\Commands;
 
 use Illuminate\Console\Command;
-use PhpTelegramBot\Laravel\PhpTelegramBotContract;
 use Longman\TelegramBot\Exception\TelegramException;
+use PhpTelegramBot\Laravel\PhpTelegramBotContract;
 
 class WebhookCommand extends Command
 {
@@ -13,7 +15,7 @@ class WebhookCommand extends Command
 
     protected $description = 'Set or delete webhook for Telegram bot';
 
-    /** @var PhpTelegramBotContract */
+    /** @var \PhpTelegramBot\Laravel\PhpTelegramBotContract */
     protected $telegramBot;
 
     public function __construct(PhpTelegramBotContract $telegramBot)
@@ -28,9 +30,9 @@ class WebhookCommand extends Command
         $webhook = $this->argument('url');
         $delete = $this->option('delete');
 
-        if (!($webhook || $delete)) {
-            $this->error("Not enough arguments!");
-            $this->error("php artisan telegram:webhook {url?} {--delete}");
+        if (! ($webhook || $delete)) {
+            $this->error('Not enough arguments!');
+            $this->error('php artisan telegram:webhook {url?} {--delete}');
             return;
         }
 
@@ -48,14 +50,13 @@ class WebhookCommand extends Command
 
         if ($webhook) {
             try {
-                $this->telegramBot->setWebhook($webhook);;
+                $this->telegramBot->setWebhook($webhook);
                 $this->info('Webhook set succesfully!');
             } catch (TelegramException $e) {
                 $this->error("Couldn't set webhook");
                 $this->error($e->getMessage());
                 return;
             }
-
         }
 
         $this->info('All done!');

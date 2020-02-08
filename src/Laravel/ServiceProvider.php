@@ -13,6 +13,7 @@ declare(strict_types=1);
 namespace PhpTelegramBot\Laravel;
 
 use Illuminate\Support\ServiceProvider as LaravelServiceProvider;
+use PhpTelegramBot\Laravel\Commands\WebhookCommand;
 
 class ServiceProvider extends LaravelServiceProvider
 {
@@ -92,6 +93,13 @@ class ServiceProvider extends LaravelServiceProvider
 
             return $bot;
         });
+
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                WebhookCommand::class
+            ]);
+        }
+
     }
 
     /**

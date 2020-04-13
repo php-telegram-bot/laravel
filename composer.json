@@ -23,8 +23,8 @@
     ],
     "require": {
         "php": "^7.2",
-        "illuminate/database": "^6.0",
-        "illuminate/support": "^6.0",
+        "illuminate/database": "^6.0|^7.0",
+        "illuminate/support": "^6.0|^7.0",
         "longman/telegram-bot": "^0.61"
     },
     "require-dev": {

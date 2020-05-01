@@ -75,7 +75,11 @@ class ServiceProvider extends LaravelServiceProvider
             if ($config['database']['enabled'] === true) {
                 /** @var \Illuminate\Database\Connection $connection */
                 $connection = $app['db']->connection($config['database']['connection']);
-                $bot->enableExternalMySql($connection->getPdo());
+                /*
+                    Ability to use custom table prefix
+                */
+                $tablePrefix = (!empty($config['database']['prefix']) ? $config['database']['prefix'] : '';
+                $bot->enableExternalMySql($connection->getPdo(), $tablePrefix);
             }
 
             // Enable admins if provided

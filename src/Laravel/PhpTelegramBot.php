@@ -12,7 +12,7 @@ declare(strict_types=1);
  */
 namespace PhpTelegramBot\Laravel;
 
-use Longman\TelegramBot\Telegram;
+use PhpTelegramBot\Core\Telegram;
 
 class PhpTelegramBot extends Telegram implements PhpTelegramBotContract
 {

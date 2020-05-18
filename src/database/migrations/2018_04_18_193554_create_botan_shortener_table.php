@@ -9,9 +9,7 @@ class CreateBotanShortenerTable extends Migration
 {
     public function up()
     {
-        $tablePrefix = config('phptelegrambot.database.prefix', '');
-
-        Schema::create($tablePrefix . 'botan_shortener', static function (Blueprint $table) {
+        Schema::create(config('phptelegrambot.database.prefix', '') . 'botan_shortener', static function (Blueprint $table) {
             $table->bigInteger('id', true)->unsigned()->comment('Unique identifier for this entry');
             $table->bigInteger('user_id')->nullable()->index('user_id')->comment('Unique user identifier');
             $table->text('url', 65535)->comment('Original URL');
@@ -22,8 +20,6 @@ class CreateBotanShortenerTable extends Migration
 
     public function down()
     {
-        $tablePrefix = config('phptelegrambot.database.prefix', '');
-
-        Schema::dropIfExists($tablePrefix . 'botan_shortener');
+        Schema::dropIfExists(config('phptelegrambot.database.prefix', '') . 'botan_shortener');
     }
 }

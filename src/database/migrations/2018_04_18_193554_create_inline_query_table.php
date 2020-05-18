@@ -9,9 +9,7 @@ class CreateInlineQueryTable extends Migration
 {
     public function up()
     {
-        $tablePrefix = config('phptelegrambot.database.prefix', '');
-
-        Schema::create($tablePrefix . 'inline_query', static function (Blueprint $table) {
+        Schema::create(config('phptelegrambot.database.prefix', '') . 'inline_query', static function (Blueprint $table) {
             $table->bigInteger('id')->unsigned()->primary()->comment('Unique identifier for this query');
             $table->bigInteger('user_id')->nullable()->index('user_id')->comment('Unique user identifier');
             $table->char('location')->nullable()->comment('Location of the user');
@@ -23,8 +21,6 @@ class CreateInlineQueryTable extends Migration
 
     public function down()
     {
-        $tablePrefix = config('phptelegrambot.database.prefix', '');
-
-        Schema::dropIfExists($tablePrefix . 'inline_query');
+        Schema::dropIfExists(config('phptelegrambot.database.prefix', '') . 'inline_query');
     }
 }

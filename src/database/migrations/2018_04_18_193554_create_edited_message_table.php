@@ -9,9 +9,7 @@ class CreateEditedMessageTable extends Migration
 {
     public function up()
     {
-        $tablePrefix = config('phptelegrambot.database.prefix', '');
-
-        Schema::create($tablePrefix . 'edited_message', static function (Blueprint $table) {
+        Schema::create(config('phptelegrambot.database.prefix', '') . 'edited_message', static function (Blueprint $table) {
             $table->bigInteger('id', true)->unsigned()->comment('Unique identifier for this entry');
             $table->bigInteger('chat_id')->nullable()->index('chat_id')->comment('Unique chat identifier');
             $table->bigInteger('message_id')->unsigned()->nullable()->index('message_id')->comment('Unique message identifier');
@@ -29,8 +27,6 @@ class CreateEditedMessageTable extends Migration
 
     public function down()
     {
-        $tablePrefix = config('phptelegrambot.database.prefix', '');
-
-        Schema::dropIfExists($tablePrefix . 'edited_message');
+        Schema::dropIfExists(config('phptelegrambot.database.prefix', '') . 'edited_message');
     }
 }

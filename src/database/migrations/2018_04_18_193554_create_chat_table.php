@@ -9,9 +9,7 @@ class CreateChatTable extends Migration
 {
     public function up()
     {
-        $tablePrefix = config('phptelegrambot.database.prefix', '');
-
-        Schema::create($tablePrefix . 'chat', static function (Blueprint $table) {
+        Schema::create(config('phptelegrambot.database.prefix', '') . 'chat', static function (Blueprint $table) {
             $table->bigInteger('id')->primary()->comment('Unique user or chat identifier');
             $table->enum('type', ['private', 'group', 'supergroup', 'channel'])->comment('Chat type, either private, group, supergroup or channel');
             $table->char('title')->nullable()->default('')->comment('Chat (group) title, is null if chat type is private');
@@ -24,8 +22,6 @@ class CreateChatTable extends Migration
 
     public function down()
     {
-        $tablePrefix = config('phptelegrambot.database.prefix', '');
-
-        Schema::dropIfExists($tablePrefix . 'chat');
+        Schema::dropIfExists(config('phptelegrambot.database.prefix', '') . 'chat');
     }
 }

@@ -9,21 +9,17 @@ class AddForeignKeysToCallbackQueryTable extends Migration
 {
     public function up()
     {
-        $tablePrefix = config('phptelegrambot.database.prefix', '');
-
-        Schema::table($tablePrefix . 'callback_query', static function (Blueprint $table) {
-            $table->foreign('user_id', 'callback_query_ibfk_1')->references('id')->on('user')->onUpdate('RESTRICT')->onDelete('RESTRICT');
-            $table->foreign('chat_id', 'callback_query_ibfk_2')->references('chat_id')->on('message')->onUpdate('RESTRICT')->onDelete('RESTRICT');
+        Schema::table(config('phptelegrambot.database.prefix', '') . 'callback_query', static function (Blueprint $table) {
+            $table->foreign('user_id', config('phptelegrambot.database.prefix', '') . 'callback_query_ibfk_1')->references('id')->on(config('phptelegrambot.database.prefix', '') . 'user')->onUpdate('RESTRICT')->onDelete('RESTRICT');
+            $table->foreign('chat_id', config('phptelegrambot.database.prefix', '') . 'callback_query_ibfk_2')->references('chat_id')->on(config('phptelegrambot.database.prefix', '') . 'message')->onUpdate('RESTRICT')->onDelete('RESTRICT');
         });
     }
 
     public function down()
     {
-        $tablePrefix = config('phptelegrambot.database.prefix', '');
-
-        Schema::table($tablePrefix . 'callback_query', static function (Blueprint $table) {
-            $table->dropForeign('callback_query_ibfk_1');
-            $table->dropForeign('callback_query_ibfk_2');
+        Schema::table(config('phptelegrambot.database.prefix', '') . 'callback_query', static function (Blueprint $table) {
+            $table->dropForeign(config('phptelegrambot.database.prefix', '') . 'callback_query_ibfk_1');
+            $table->dropForeign(config('phptelegrambot.database.prefix', '') . 'callback_query_ibfk_2');
         });
     }
 }

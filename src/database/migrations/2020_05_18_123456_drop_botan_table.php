@@ -10,8 +10,7 @@ class DropBotanTable extends Migration
     public function up()
     {
         $tablePrefix = config('phptelegrambot.database.prefix', '');
-
-        Schema::dropIfExists($tablePrefix . 'botan_shortener');
+        Schema::dropIfExists(config('phptelegrambot.database.prefix', '') . 'botan_shortener');
     }
 
     public function down()

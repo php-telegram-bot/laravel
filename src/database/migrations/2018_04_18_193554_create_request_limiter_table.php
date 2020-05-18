@@ -24,6 +24,6 @@ class CreateRequestLimiterTable extends Migration
     {
         $tablePrefix = config('phptelegrambot.database.prefix', '');
 
-        Schema::drop($tablePrefix . 'request_limiter');
+        Schema::dropIfExists($tablePrefix . 'request_limiter');
     }
 }

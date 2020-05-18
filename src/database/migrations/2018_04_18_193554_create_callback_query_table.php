@@ -27,6 +27,6 @@ class CreateCallbackQueryTable extends Migration
     {
         $tablePrefix = config('phptelegrambot.database.prefix', '');
 
-        Schema::drop($tablePrefix . 'callback_query');
+        Schema::dropIfExists($tablePrefix . 'callback_query');
     }
 }

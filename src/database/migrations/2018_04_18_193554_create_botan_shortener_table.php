@@ -24,6 +24,6 @@ class CreateBotanShortenerTable extends Migration
     {
         $tablePrefix = config('phptelegrambot.database.prefix', '');
 
-        Schema::drop($tablePrefix . 'botan_shortener');
+        Schema::dropIfExists($tablePrefix . 'botan_shortener');
     }
 }

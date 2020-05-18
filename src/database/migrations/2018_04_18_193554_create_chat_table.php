@@ -26,6 +26,6 @@ class CreateChatTable extends Migration
     {
         $tablePrefix = config('phptelegrambot.database.prefix', '');
 
-        Schema::drop($tablePrefix . 'chat');
+        Schema::dropIfExists($tablePrefix . 'chat');
     }
 }

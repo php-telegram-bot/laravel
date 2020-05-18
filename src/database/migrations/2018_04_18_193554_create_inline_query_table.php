@@ -25,6 +25,6 @@ class CreateInlineQueryTable extends Migration
     {
         $tablePrefix = config('phptelegrambot.database.prefix', '');
 
-        Schema::drop($tablePrefix . 'inline_query');
+        Schema::dropIfExists($tablePrefix . 'inline_query');
     }
 }

@@ -26,6 +26,6 @@ class CreateChosenInlineResultTable extends Migration
     {
         $tablePrefix = config('phptelegrambot.database.prefix', '');
 
-        Schema::drop($tablePrefix . 'chosen_inline_result');
+        Schema::dropIfExists($tablePrefix . 'chosen_inline_result');
     }
 }

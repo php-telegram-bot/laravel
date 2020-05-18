@@ -31,6 +31,6 @@ class CreateEditedMessageTable extends Migration
     {
         $tablePrefix = config('phptelegrambot.database.prefix', '');
 
-        Schema::drop($tablePrefix . 'edited_message');
+        Schema::dropIfExists($tablePrefix . 'edited_message');
     }
 }

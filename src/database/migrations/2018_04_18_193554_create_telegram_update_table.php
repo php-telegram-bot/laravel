@@ -27,6 +27,6 @@ class CreateTelegramUpdateTable extends Migration
     {
         $tablePrefix = config('phptelegrambot.database.prefix', '');
 
-        Schema::drop($tablePrefix . 'telegram_update');
+        Schema::dropIfExists($tablePrefix . 'telegram_update');
     }
 }

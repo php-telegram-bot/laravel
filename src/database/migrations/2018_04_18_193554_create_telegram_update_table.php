@@ -9,7 +9,9 @@ class CreateTelegramUpdateTable extends Migration
 {
     public function up()
     {
-        Schema::create('telegram_update', static function (Blueprint $table) {
+        $tablePrefix = config('phptelegrambot.database.prefix', '');
+
+        Schema::create($tablePrefix . 'telegram_update', static function (Blueprint $table) {
             $table->bigInteger('id')->unsigned()->primary()->comment('Update\'s unique identifier');
             $table->bigInteger('chat_id')->nullable()->comment('Unique chat identifier');
             $table->bigInteger('message_id')->unsigned()->nullable()->comment('Unique message identifier');
@@ -23,6 +25,8 @@ class CreateTelegramUpdateTable extends Migration
 
     public function down()
     {
-        Schema::drop('telegram_update');
+        $tablePrefix = config('phptelegrambot.database.prefix', '');
+
+        Schema::drop($tablePrefix . 'telegram_update');
     }
 }

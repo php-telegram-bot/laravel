@@ -9,7 +9,9 @@ class CreateCallbackQueryTable extends Migration
 {
     public function up()
     {
-        Schema::create('callback_query', static function (Blueprint $table) {
+        $tablePrefix = config('phptelegrambot.database.prefix', '');
+
+        Schema::create($tablePrefix . 'callback_query', static function (Blueprint $table) {
             $table->bigInteger('id')->unsigned()->primary()->comment('Unique identifier for this query');
             $table->bigInteger('user_id')->nullable()->index('user_id')->comment('Unique user identifier');
             $table->bigInteger('chat_id')->nullable()->index('chat_id')->comment('Unique chat identifier');
@@ -23,6 +25,8 @@ class CreateCallbackQueryTable extends Migration
 
     public function down()
     {
-        Schema::drop('callback_query');
+        $tablePrefix = config('phptelegrambot.database.prefix', '');
+
+        Schema::drop($tablePrefix . 'callback_query');
     }
 }

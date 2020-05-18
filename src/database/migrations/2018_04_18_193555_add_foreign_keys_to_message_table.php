@@ -9,7 +9,9 @@ class AddForeignKeysToMessageTable extends Migration
 {
     public function up()
     {
-        Schema::table('message', static function (Blueprint $table) {
+        $tablePrefix = config('phptelegrambot.database.prefix', '');
+
+        Schema::table($tablePrefix . 'message', static function (Blueprint $table) {
             $table->foreign('user_id', 'message_ibfk_1')->references('id')->on('user')->onUpdate('RESTRICT')->onDelete('RESTRICT');
             $table->foreign('chat_id', 'message_ibfk_2')->references('id')->on('chat')->onUpdate('RESTRICT')->onDelete('RESTRICT');
             $table->foreign('forward_from', 'message_ibfk_3')->references('id')->on('user')->onUpdate('RESTRICT')->onDelete('RESTRICT');
@@ -22,7 +24,9 @@ class AddForeignKeysToMessageTable extends Migration
 
     public function down()
     {
-        Schema::table('message', static function (Blueprint $table) {
+        $tablePrefix = config('phptelegrambot.database.prefix', '');
+
+        Schema::table($tablePrefix . 'message', static function (Blueprint $table) {
             $table->dropForeign('message_ibfk_1');
             $table->dropForeign('message_ibfk_2');
             $table->dropForeign('message_ibfk_3');

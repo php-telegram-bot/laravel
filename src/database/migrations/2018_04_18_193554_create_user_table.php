@@ -9,7 +9,9 @@ class CreateUserTable extends Migration
 {
     public function up()
     {
-        Schema::create('user', static function (Blueprint $table) {
+        $tablePrefix = config('phptelegrambot.database.prefix', '');
+
+        Schema::create($tablePrefix . 'user', static function (Blueprint $table) {
             $table->bigInteger('id')->primary()->comment('Unique user identifier');
             $table->boolean('is_bot')->nullable()->default(0)->comment('True if this user is a bot');
             $table->char('first_name')->default('')->comment('User\'s first name');
@@ -22,6 +24,8 @@ class CreateUserTable extends Migration
 
     public function down()
     {
-        Schema::drop('user');
+        $tablePrefix = config('phptelegrambot.database.prefix', '');
+
+        Schema::drop($tablePrefix . 'user');
     }
 }

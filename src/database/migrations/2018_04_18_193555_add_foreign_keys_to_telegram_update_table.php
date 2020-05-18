@@ -9,7 +9,9 @@ class AddForeignKeysToTelegramUpdateTable extends Migration
 {
     public function up()
     {
-        Schema::table('telegram_update', static function (Blueprint $table) {
+        $tablePrefix = config('phptelegrambot.database.prefix', '');
+
+        Schema::table($tablePrefix . 'telegram_update', static function (Blueprint $table) {
             $table->foreign('chat_id', 'telegram_update_ibfk_1')->references('chat_id')->on('message')->onUpdate('RESTRICT')->onDelete('RESTRICT');
             $table->foreign('inline_query_id', 'telegram_update_ibfk_2')->references('id')->on('inline_query')->onUpdate('RESTRICT')->onDelete('RESTRICT');
             $table->foreign(
@@ -23,7 +25,9 @@ class AddForeignKeysToTelegramUpdateTable extends Migration
 
     public function down()
     {
-        Schema::table('telegram_update', static function (Blueprint $table) {
+        $tablePrefix = config('phptelegrambot.database.prefix', '');
+
+        Schema::table($tablePrefix . 'telegram_update', static function (Blueprint $table) {
             $table->dropForeign('telegram_update_ibfk_1');
             $table->dropForeign('telegram_update_ibfk_2');
             $table->dropForeign('telegram_update_ibfk_3');

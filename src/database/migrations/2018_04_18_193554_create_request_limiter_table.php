@@ -9,7 +9,9 @@ class CreateRequestLimiterTable extends Migration
 {
     public function up()
     {
-        Schema::create('request_limiter', static function (Blueprint $table) {
+        $tablePrefix = config('phptelegrambot.database.prefix', '');
+
+        Schema::create($tablePrefix . 'request_limiter', static function (Blueprint $table) {
             $table->bigInteger('id', true)->unsigned()->comment('Unique identifier for this entry');
             $table->char('chat_id')->nullable()->comment('Unique chat identifier');
             $table->char('inline_message_id')->nullable()->comment('Identifier of the sent inline message');
@@ -20,6 +22,8 @@ class CreateRequestLimiterTable extends Migration
 
     public function down()
     {
-        Schema::drop('request_limiter');
+        $tablePrefix = config('phptelegrambot.database.prefix', '');
+
+        Schema::drop($tablePrefix . 'request_limiter');
     }
 }

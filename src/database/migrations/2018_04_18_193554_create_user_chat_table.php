@@ -9,7 +9,9 @@ class CreateUserChatTable extends Migration
 {
     public function up()
     {
-        Schema::create('user_chat', static function (Blueprint $table) {
+        $tablePrefix = config('phptelegrambot.database.prefix', '');
+
+        Schema::create($tablePrefix . 'user_chat', static function (Blueprint $table) {
             $table->bigInteger('user_id')->comment('Unique user identifier');
             $table->bigInteger('chat_id')->index('chat_id')->comment('Unique user or chat identifier');
             $table->primary(['user_id', 'chat_id']);
@@ -18,6 +20,8 @@ class CreateUserChatTable extends Migration
 
     public function down()
     {
-        Schema::drop('user_chat');
+        $tablePrefix = config('phptelegrambot.database.prefix', '');
+
+        Schema::drop($tablePrefix . 'user_chat');
     }
 }

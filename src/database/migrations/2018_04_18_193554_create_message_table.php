@@ -9,7 +9,9 @@ class CreateMessageTable extends Migration
 {
     public function up()
     {
-        Schema::create('message', static function (Blueprint $table) {
+        $tablePrefix = config('phptelegrambot.database.prefix', '');
+
+        Schema::create($tablePrefix . 'message', static function (Blueprint $table) {
             $table->bigInteger('chat_id')->comment('Unique chat identifier');
             $table->bigInteger('id')->unsigned()->comment('Unique message identifier');
             $table->bigInteger('user_id')->nullable()->index('user_id')->comment('Unique user identifier');
@@ -59,6 +61,8 @@ class CreateMessageTable extends Migration
 
     public function down()
     {
-        Schema::drop('message');
+        $tablePrefix = config('phptelegrambot.database.prefix', '');
+
+        Schema::drop($tablePrefix . 'message');
     }
 }

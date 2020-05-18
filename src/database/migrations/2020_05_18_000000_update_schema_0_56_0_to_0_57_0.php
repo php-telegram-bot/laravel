@@ -17,7 +17,7 @@ class UpdateSchema0560To0570 extends Migration
                 $table->char('invoice_payload', 255)->default('')->comment('Bot specified invoice payload');
                 $table->char('shipping_address', 255)->default('')->comment('User specified shipping address');
                 $table->dateTime('created_at')->nullable()->comment('Entry date creation');
-                $table->foreign('user_id', $this->prefix . 'shipping_query_ibfk_1')->references('id')->on($this->prefix . 'user')->onUpdate('CASCADE')->onDelete('CASCADE');
+                $table->foreign('user_id', $this->prefix . 'shipping_query_ibfk_1')->references('id')->on($this->prefix . 'user')->onUpdate('RESTRICT')->onDelete('RESTRICT');
             });
 
             Schema::create($this->prefix . 'pre_checkout_query', function (Blueprint $table) {
@@ -29,7 +29,7 @@ class UpdateSchema0560To0570 extends Migration
                 $table->char('shipping_option_id', 255)->comment('Identifier of the shipping option chosen by the user');
                 $table->text('order_info')->comment('Order info provided by the user');
                 $table->dateTime('created_at')->nullable()->comment('Entry date creation');
-                $table->foreign('user_id', $this->prefix . 'pre_checkout_query_ibfk_1')->references('id')->on($this->prefix . 'user')->onUpdate('CASCADE')->onDelete('CASCADE');
+                $table->foreign('user_id', $this->prefix . 'pre_checkout_query_ibfk_1')->references('id')->on($this->prefix . 'user')->onUpdate('RESTRICT')->onDelete('RESTRICT');
             });
 
             Schema::create($this->prefix . 'poll', static function (Blueprint $table) {

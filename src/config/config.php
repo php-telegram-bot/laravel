@@ -17,6 +17,7 @@ return [
     'database' => [
         'enabled'    => false,
         'connection' => env('DB_CONNECTION', 'mysql'),
+        'prefix'     => '',
     ],
 
     'commands' => [

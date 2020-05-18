@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use PhpTelegramBot\Laravel\Migration;
 
 class UpdateSchema0600To0610 extends Migration
 {
@@ -13,7 +13,7 @@ class UpdateSchema0600To0610 extends Migration
         Schema::disableForeignKeyConstraints();
 
         try {
-            Schema::table('telegram_update', static function (Blueprint $table) {
+            Schema::table($this->prefix . 'telegram_update', static function (Blueprint $table) {
                 $table->dropIndex('message_id');
                 $table->index('message_id', 'message_id');
                 $table->index(['chat_id', 'message_id'], 'chat_message_id');
@@ -30,7 +30,7 @@ class UpdateSchema0600To0610 extends Migration
         Schema::disableForeignKeyConstraints();
 
         try {
-            Schema::table('telegram_update', static function (Blueprint $table) {
+            Schema::table($this->prefix . 'telegram_update', static function (Blueprint $table) {
                 $table->dropIndex('chat_message_id');
                 $table->dropIndex('message_id');
                 $table->index('message_id', 'message_id');

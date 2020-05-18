@@ -15,8 +15,8 @@ class UpdateSchema0570To0580 extends Migration
             Schema::table($this->prefix . 'message', static function (Blueprint $table) {
                 $table->text('reply_markup')->nullable()->comment('Inline keyboard attached to the message')->after('passport_data');
             });
-        } catch (Exception $e) {
-            // Migration may be partly done already...
+        } catch (Throwable $e) {
+            return; // Migration may be partly done already...
         }
     }
 
@@ -26,8 +26,8 @@ class UpdateSchema0570To0580 extends Migration
             Schema::table($this->prefix . 'message', static function (Blueprint $table) {
                 $table->dropColumn('reply_markup');
             });
-        } catch (Exception $e) {
-            // Migration may be partly done already...
+        } catch (Throwable $e) {
+            return; // Migration may be partly done already...
         }
     }
 }

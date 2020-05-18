@@ -14,8 +14,8 @@ class UpdateSchema0530To0540 extends Migration
             Schema::table($this->prefix . 'message', static function (Blueprint $table) {
                 $table->text('game')->nullable()->comment('Message is a game, information about the game.')->after('document');
             });
-        } catch (Exception $e) {
-            // Migration may be partly done already...
+        } catch (Throwable $e) {
+            return; // Migration may be partly done already...
         }
     }
 
@@ -25,8 +25,8 @@ class UpdateSchema0530To0540 extends Migration
             Schema::table($this->prefix . 'message', static function (Blueprint $table) {
                 $table->dropColumn('game');
             });
-        } catch (Exception $e) {
-            // Migration may be partly done already...
+        } catch (Throwable $e) {
+            return; // Migration may be partly done already...
         }
     }
 }

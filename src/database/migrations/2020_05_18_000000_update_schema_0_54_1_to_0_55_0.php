@@ -15,8 +15,8 @@ class UpdateSchema0541To0550 extends Migration
                 $table->text('animation')->nullable()->comment('Message is an animation, information about the animation')->after('document');
                 $table->text('passport_data')->nullable()->comment('Telegram Passport data')->after('connected_website');
             });
-        } catch (Exception $e) {
-            // Migration may be partly done already...
+        } catch (Throwable $e) {
+            return; // Migration may be partly done already...
         }
     }
 
@@ -27,8 +27,8 @@ class UpdateSchema0541To0550 extends Migration
                 $table->dropColumn('passport_data');
                 $table->dropColumn('animation');
             });
-        } catch (Exception $e) {
-            // Migration may be partly done already...
+        } catch (Throwable $e) {
+            return; // Migration may be partly done already...
         }
     }
 }

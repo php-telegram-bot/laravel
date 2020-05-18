@@ -36,8 +36,8 @@ class UpdateSchema0611To0620 extends Migration
                 $table->index('poll_answer_poll_id', 'poll_answer_poll_id');
                 $table->foreign('poll_answer_poll_id', $this->prefix . 'telegram_update_ibfk_11')->references('poll_id')->on($this->prefix . 'poll_answer')->onUpdate('RESTRICT')->onDelete('RESTRICT');
             });
-        } catch (Exception $e) {
-            // Migration may be partly done already...
+        } catch (Throwable $e) {
+            return; // Migration may be partly done already...
         }
     }
 
@@ -63,8 +63,8 @@ class UpdateSchema0611To0620 extends Migration
                 $table->dropColumn('is_anonymous');
                 $table->dropColumn('total_voter_count');
             });
-        } catch (Exception $e) {
-            // Migration may be partly done already...
+        } catch (Throwable $e) {
+            return; // Migration may be partly done already...
         }
     }
 }

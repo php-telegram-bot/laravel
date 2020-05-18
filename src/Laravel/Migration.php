@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /*
  * This file is part of the PhpTelegramBot/Laravel package.
  *
@@ -11,13 +9,13 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace PhpTelegramBot\Laravel;
 
 class Migration extends \Illuminate\Database\Migrations\Migration
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $prefix = '';
 
     public function __construct()

@@ -18,8 +18,8 @@ class UpdateSchema0600To0610 extends Migration
                 $table->index('message_id', 'message_id');
                 $table->index(['chat_id', 'message_id'], 'chat_message_id');
             });
-        } catch (Exception $e) {
-            // Migration may be partly done already...
+        } catch (Throwable $e) {
+            return; // Migration may be partly done already...
         }
 
         Schema::enableForeignKeyConstraints();
@@ -35,8 +35,8 @@ class UpdateSchema0600To0610 extends Migration
                 $table->dropIndex('message_id');
                 $table->index('message_id', 'message_id');
             });
-        } catch (Exception $e) {
-            // Migration may be partly done already...
+        } catch (Throwable $e) {
+            return; // Migration may be partly done already...
         }
 
         Schema::enableForeignKeyConstraints();

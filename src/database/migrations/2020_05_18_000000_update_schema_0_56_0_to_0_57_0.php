@@ -80,8 +80,8 @@ class UpdateSchema0560To0570 extends Migration
                 $table->foreign('pre_checkout_query_id', $this->prefix . 'telegram_update_ibfk_9')->references('id')->on($this->prefix . 'pre_checkout_query');
                 $table->foreign('poll_id', $this->prefix . 'telegram_update_ibfk_10')->references('id')->on($this->prefix . 'poll');
             });
-        } catch (Exception $e) {
-            // Migration may be partly done already...
+        } catch (Throwable $e) {
+            return; // Migration may be partly done already...
         }
     }
 
@@ -132,8 +132,8 @@ class UpdateSchema0560To0570 extends Migration
             Schema::dropIfExists($this->prefix . 'poll');
             Schema::dropIfExists($this->prefix . 'pre_checkout_query');
             Schema::dropIfExists($this->prefix . 'shipping_query');
-        } catch (Exception $e) {
-            // Migration may be partly done already...
+        } catch (Throwable $e) {
+            return; // Migration may be partly done already...
         }
     }
 }

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /*
  * This file is part of the PhpTelegramBot/Laravel package.
  *
@@ -10,6 +8,9 @@ declare(strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
+declare(strict_types=1);
+
 namespace PhpTelegramBot\Laravel;
 
 use Illuminate\Support\ServiceProvider as LaravelServiceProvider;
@@ -29,7 +30,7 @@ class ServiceProvider extends LaravelServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         // Publish config files
         $this->publishes([
@@ -52,7 +53,7 @@ class ServiceProvider extends LaravelServiceProvider
      *
      * @return void
      */
-    public function register()
+    public function register(): void
     {
         $this->app->bind(PhpTelegramBotContract::class, static function ($app) {
             $config = $app['config']->get('phptelegrambot');
@@ -108,7 +109,7 @@ class ServiceProvider extends LaravelServiceProvider
      *
      * @return array
      */
-    public function provides()
+    public function provides(): array
     {
         return [PhpTelegramBotContract::class];
     }

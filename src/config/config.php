@@ -17,7 +17,7 @@ return [
     'database' => [
         'enabled'    => false,
         'connection' => env('DB_CONNECTION', 'mysql'),
-        'prefix'     => '',
+        'prefix'     => env('PHP_TELEGRAM_BOT_TABLE_PREFIX', ''),
     ],
 
     'commands' => [
@@ -42,6 +42,6 @@ return [
         'interval' => 1,
     ],
 
-    'upload_path'   => '',
-    'download_path' => '',
+    'upload_path'   => env('PHP_TELEGRAM_BOT_UPLOAD_PATH', ''),
+    'download_path' => env('PHP_TELEGRAM_BOT_DOWNLOAD_PATH', ''),
 ];

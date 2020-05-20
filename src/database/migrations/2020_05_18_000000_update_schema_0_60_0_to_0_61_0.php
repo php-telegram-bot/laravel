@@ -19,6 +19,7 @@ class UpdateSchema0600To0610 extends Migration
                 $table->index(['chat_id', 'message_id'], 'chat_message_id');
             });
         } catch (Throwable $e) {
+            \Log::error($e->getMessage ());
             return; // Migration may be partly done already...
         }
 
@@ -36,6 +37,7 @@ class UpdateSchema0600To0610 extends Migration
                 $table->index('message_id', 'message_id');
             });
         } catch (Throwable $e) {
+            \Log::error($e->getMessage ());
             return; // Migration may be partly done already...
         }
 

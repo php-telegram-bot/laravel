@@ -15,6 +15,7 @@ class UpdateSchema0530To0540 extends Migration
                 $table->text('game')->nullable()->comment('Message is a game, information about the game.')->after('document');
             });
         } catch (Throwable $e) {
+            \Log::error($e->getMessage ());
             return; // Migration may be partly done already...
         }
     }
@@ -26,6 +27,7 @@ class UpdateSchema0530To0540 extends Migration
                 $table->dropColumn('game');
             });
         } catch (Throwable $e) {
+            \Log::error($e->getMessage ());
             return; // Migration may be partly done already...
         }
     }

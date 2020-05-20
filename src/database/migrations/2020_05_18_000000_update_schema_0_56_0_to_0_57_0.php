@@ -81,6 +81,7 @@ class UpdateSchema0560To0570 extends Migration
                 $table->foreign('poll_id', $this->prefix . 'telegram_update_ibfk_10')->references('id')->on($this->prefix . 'poll');
             });
         } catch (Throwable $e) {
+            \Log::error($e->getMessage ());
             return; // Migration may be partly done already...
         }
     }
@@ -133,6 +134,7 @@ class UpdateSchema0560To0570 extends Migration
             Schema::dropIfExists($this->prefix . 'pre_checkout_query');
             Schema::dropIfExists($this->prefix . 'shipping_query');
         } catch (Throwable $e) {
+            \Log::error($e->getMessage ());
             return; // Migration may be partly done already...
         }
     }

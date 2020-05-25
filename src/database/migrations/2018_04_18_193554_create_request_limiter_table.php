@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateRequestLimiterTable extends Migration
 {
-    public function up()
+    public function up(): void
     {
         Schema::create('request_limiter', static function (Blueprint $table) {
             $table->bigInteger('id', true)->unsigned()->comment('Unique identifier for this entry');
@@ -18,8 +19,8 @@ class CreateRequestLimiterTable extends Migration
         });
     }
 
-    public function down()
+    public function down(): void
     {
-        Schema::drop('request_limiter');
+        Schema::dropIfExists('request_limiter');
     }
 }

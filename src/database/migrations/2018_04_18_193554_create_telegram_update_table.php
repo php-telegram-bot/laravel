@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateTelegramUpdateTable extends Migration
 {
-    public function up()
+    public function up(): void
     {
         Schema::create('telegram_update', static function (Blueprint $table) {
             $table->bigInteger('id')->unsigned()->primary()->comment('Update\'s unique identifier');
@@ -21,8 +22,8 @@ class CreateTelegramUpdateTable extends Migration
         });
     }
 
-    public function down()
+    public function down(): void
     {
-        Schema::drop('telegram_update');
+        Schema::dropIfExists('telegram_update');
     }
 }

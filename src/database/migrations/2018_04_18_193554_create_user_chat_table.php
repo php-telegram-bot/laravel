@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateUserChatTable extends Migration
 {
-    public function up()
+    public function up(): void
     {
         Schema::create('user_chat', static function (Blueprint $table) {
             $table->bigInteger('user_id')->comment('Unique user identifier');
@@ -16,8 +17,8 @@ class CreateUserChatTable extends Migration
         });
     }
 
-    public function down()
+    public function down(): void
     {
-        Schema::drop('user_chat');
+        Schema::dropIfExists('user_chat');
     }
 }

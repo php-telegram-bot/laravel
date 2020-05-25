@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateUserTable extends Migration
 {
-    public function up()
+    public function up(): void
     {
         Schema::create('user', static function (Blueprint $table) {
             $table->bigInteger('id')->primary()->comment('Unique user identifier');
@@ -20,8 +21,8 @@ class CreateUserTable extends Migration
         });
     }
 
-    public function down()
+    public function down(): void
     {
-        Schema::drop('user');
+        Schema::dropIfExists('user');
     }
 }

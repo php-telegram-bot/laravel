@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Schema;
 use PhpTelegramBot\Laravel\Migration;
 
@@ -16,7 +17,7 @@ class UpdateSchema0541To0550 extends Migration
                 $table->text('passport_data')->nullable()->comment('Telegram Passport data')->after('connected_website');
             });
         } catch (Throwable $e) {
-            \Log::error($e->getMessage ());
+            Log::error($e->getMessage());
             return; // Migration may be partly done already...
         }
     }
@@ -29,7 +30,7 @@ class UpdateSchema0541To0550 extends Migration
                 $table->dropColumn('animation');
             });
         } catch (Throwable $e) {
-            \Log::error($e->getMessage ());
+            Log::error($e->getMessage());
             return; // Migration may be partly done already...
         }
     }

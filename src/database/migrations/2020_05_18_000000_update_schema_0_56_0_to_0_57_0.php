@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Schema;
 use PhpTelegramBot\Laravel\Migration;
 
@@ -17,7 +18,7 @@ class UpdateSchema0560To0570 extends Migration
                 $table->char('invoice_payload', 255)->default('')->comment('Bot specified invoice payload');
                 $table->char('shipping_address', 255)->default('')->comment('User specified shipping address');
                 $table->dateTime('created_at')->nullable()->comment('Entry date creation');
-                $table->foreign('user_id', $this->prefix . 'shipping_query_ibfk_1')->references('id')->on($this->prefix . 'user')->onUpdate('RESTRICT')->onDelete('RESTRICT');
+                $table->foreign('user_id', 'shipping_query_ibfk_1')->references('id')->on($this->prefix . 'user')->onUpdate('RESTRICT')->onDelete('RESTRICT');
             });
 
             Schema::create($this->prefix . 'pre_checkout_query', function (Blueprint $table) {
@@ -29,7 +30,7 @@ class UpdateSchema0560To0570 extends Migration
                 $table->char('shipping_option_id', 255)->comment('Identifier of the shipping option chosen by the user');
                 $table->text('order_info')->comment('Order info provided by the user');
                 $table->dateTime('created_at')->nullable()->comment('Entry date creation');
-                $table->foreign('user_id', $this->prefix . 'pre_checkout_query_ibfk_1')->references('id')->on($this->prefix . 'user')->onUpdate('RESTRICT')->onDelete('RESTRICT');
+                $table->foreign('user_id', 'pre_checkout_query_ibfk_1')->references('id')->on($this->prefix . 'user')->onUpdate('RESTRICT')->onDelete('RESTRICT');
             });
 
             Schema::create($this->prefix . 'poll', static function (Blueprint $table) {
@@ -74,14 +75,14 @@ class UpdateSchema0560To0570 extends Migration
                 $table->index('pre_checkout_query_id', 'pre_checkout_query_id');
                 $table->index('poll_id', 'poll_id');
 
-                $table->foreign(['chat_id', 'channel_post_id'], $this->prefix . 'telegram_update_ibfk_6')->references(['chat_id', 'id'])->on($this->prefix . 'message');
-                $table->foreign('edited_channel_post_id', $this->prefix . 'telegram_update_ibfk_7')->references('id')->on($this->prefix . 'edited_message');
-                $table->foreign('shipping_query_id', $this->prefix . 'telegram_update_ibfk_8')->references('id')->on($this->prefix . 'shipping_query');
-                $table->foreign('pre_checkout_query_id', $this->prefix . 'telegram_update_ibfk_9')->references('id')->on($this->prefix . 'pre_checkout_query');
-                $table->foreign('poll_id', $this->prefix . 'telegram_update_ibfk_10')->references('id')->on($this->prefix . 'poll');
+                $table->foreign(['chat_id', 'channel_post_id'], 'telegram_update_ibfk_6')->references(['chat_id', 'id'])->on($this->prefix . 'message');
+                $table->foreign('edited_channel_post_id', 'telegram_update_ibfk_7')->references('id')->on($this->prefix . 'edited_message');
+                $table->foreign('shipping_query_id', 'telegram_update_ibfk_8')->references('id')->on($this->prefix . 'shipping_query');
+                $table->foreign('pre_checkout_query_id', 'telegram_update_ibfk_9')->references('id')->on($this->prefix . 'pre_checkout_query');
+                $table->foreign('poll_id', 'telegram_update_ibfk_10')->references('id')->on($this->prefix . 'poll');
             });
         } catch (Throwable $e) {
-            \Log::error($e->getMessage ());
+            Log::error($e->getMessage());
             return; // Migration may be partly done already...
         }
     }
@@ -89,12 +90,12 @@ class UpdateSchema0560To0570 extends Migration
     public function down(): void
     {
         try {
-            Schema::table($this->prefix . 'telegram_update', function (Blueprint $table) {
-                $table->dropForeign($this->prefix . 'telegram_update_ibfk_10');
-                $table->dropForeign($this->prefix . 'telegram_update_ibfk_9');
-                $table->dropForeign($this->prefix . 'telegram_update_ibfk_8');
-                $table->dropForeign($this->prefix . 'telegram_update_ibfk_7');
-                $table->dropForeign($this->prefix . 'telegram_update_ibfk_6');
+            Schema::table($this->prefix . 'telegram_update', static function (Blueprint $table) {
+                $table->dropForeign('telegram_update_ibfk_10');
+                $table->dropForeign('telegram_update_ibfk_9');
+                $table->dropForeign('telegram_update_ibfk_8');
+                $table->dropForeign('telegram_update_ibfk_7');
+                $table->dropForeign('telegram_update_ibfk_6');
 
                 $table->dropIndex('poll_id');
                 $table->dropIndex('pre_checkout_query_id');
@@ -134,7 +135,7 @@ class UpdateSchema0560To0570 extends Migration
             Schema::dropIfExists($this->prefix . 'pre_checkout_query');
             Schema::dropIfExists($this->prefix . 'shipping_query');
         } catch (Throwable $e) {
-            \Log::error($e->getMessage ());
+            Log::error($e->getMessage());
             return; // Migration may be partly done already...
         }
     }

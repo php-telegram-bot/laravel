@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Schema;
 use PhpTelegramBot\Laravel\Migration;
 
@@ -19,7 +20,7 @@ class UpdateSchema0600To0610 extends Migration
                 $table->index(['chat_id', 'message_id'], 'chat_message_id');
             });
         } catch (Throwable $e) {
-            \Log::error($e->getMessage ());
+            Log::error($e->getMessage());
             return; // Migration may be partly done already...
         }
 
@@ -37,7 +38,7 @@ class UpdateSchema0600To0610 extends Migration
                 $table->index('message_id', 'message_id');
             });
         } catch (Throwable $e) {
-            \Log::error($e->getMessage ());
+            Log::error($e->getMessage());
             return; // Migration may be partly done already...
         }
 

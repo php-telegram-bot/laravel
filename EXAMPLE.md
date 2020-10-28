@@ -22,12 +22,12 @@ class TelegramController extends Controller {
 
 2- Now you need to write routes for these actions. so open your `web.php` and write:
 ```
-$router->group(['prefix' => '[YOUR BOT API KEY]', function() use ($router) {
+$router->group(['prefix' => config('phptelegrambot.bot.api_key')], function() use ($router) {
     $router->get('set', 'TelegramController@set');
     $router->post('hook', 'TelegramController@hook');
 });
 ```
-replace [YOUR BOT API KEY] with the API key that BotFather has given you. This is to make secure the `hook` url to ensure the incoming requests are from no one but Telegram.
+We prefix all routes with the long API key that BotFather has given us to make the `hook` url secure and to ensure the incoming requests are from no one but Telegram.
 
 3- Go to `https://yoursite.com/[YOUR BOT API KEY]/set`
 You should see the success message.

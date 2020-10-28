@@ -1,7 +1,7 @@
 ## Example ##
 
 
-1- After adding the package setting everything up, create a controller, for example `TelegramController.php` in you `app/Http/Controllers` directory and put this in it:
+1- After adding the package and setting everything up, create a controller, for example `TelegramController.php` in your `app/Http/Controllers` directory and put this in it:
 
 ```
 <?php

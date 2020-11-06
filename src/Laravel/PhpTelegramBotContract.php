@@ -13,7 +13,7 @@ declare(strict_types=1);
 namespace PhpTelegramBot\Laravel;
 
 /**
- * @mixin \Longman\TelegramBot\Telegram
+ * @mixin \PhpTelegramBot\Core\Telegram
  */
 interface PhpTelegramBotContract
 {

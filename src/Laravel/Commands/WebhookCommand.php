@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PhpTelegramBot\Laravel\Commands;
 
 use Illuminate\Console\Command;
-use Longman\TelegramBot\Exception\TelegramException;
+use PhpTelegramBot\Core\Exception\TelegramException;
 use PhpTelegramBot\Laravel\PhpTelegramBotContract;
 
 class WebhookCommand extends Command

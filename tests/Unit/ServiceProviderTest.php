@@ -15,7 +15,7 @@ class ServiceProviderTest extends AbstractTestCase
     /**
      * @test
      */
-    public function config_is_injectable()
+    public function config_is_injectable(): void
     {
         $this->assertIsInjectable(Repository::class);
     }
@@ -23,15 +23,17 @@ class ServiceProviderTest extends AbstractTestCase
     /**
      * @test
      */
-    public function database_is_injectable()
+    public function database_is_injectable(): void
     {
         $this->assertIsInjectable(Database::class);
     }
 
     /**
+     * @todo Fix for "array" return type from parent "provides"
+     *
      * @test
      */
-    public function provides()
+    public function provides_(): void
     {
         $this->testProvides();
     }

@@ -13,11 +13,11 @@ class UpdateSchema0611To0620 extends Migration
     {
         try {
             Schema::table($this->prefix . 'poll', static function (Blueprint $table) {
-                $table->integer('total_voter_count')->unsigned()->comment('Total number of users that voted in the poll')->after('options');
-                $table->tinyInteger('is_anonymous')->default(1)->comment('True, if the poll is anonymous')->after('is_closed');
+                $table->integer('total_voter_count')->unsigned()->nullable()->comment('Total number of users that voted in the poll')->after('options');
+                $table->boolean('is_anonymous')->default(1)->comment('True, if the poll is anonymous')->after('is_closed');
                 $table->char('type', 255)->comment('Poll type, currently can be "regular" or "quiz"')->after('is_anonymous');
-                $table->tinyInteger('allows_multiple_answers')->default(0)->comment('True, if the poll allows multiple answers')->after('type');
-                $table->integer('correct_option_id')->unsigned()->comment('0-based identifier of the correct answer option. Available only for polls in the quiz mode, which are closed, or was sent (not forwarded) by the bot or to the private chat with the bot.')->after('allows_multiple_answers');
+                $table->boolean('allows_multiple_answers')->default(0)->comment('True, if the poll allows multiple answers')->after('type');
+                $table->integer('correct_option_id')->unsigned()->nullable()->comment('0-based identifier of the correct answer option. Available only for polls in the quiz mode, which are closed, or was sent (not forwarded) by the bot or to the private chat with the bot.')->after('allows_multiple_answers');
             });
 
             Schema::table($this->prefix . 'message', static function (Blueprint $table) {
@@ -25,10 +25,11 @@ class UpdateSchema0611To0620 extends Migration
             });
 
             Schema::create($this->prefix . 'poll_answer', function (Blueprint $table) {
-                $table->bigInteger('poll_id', true, true)->comment('Unique poll identifier');
-                $table->bigInteger('user_id')->nullable(false)->comment('The user, who changed the answer to the poll');
-                $table->text('option_ids')->nullable(false)->comment('0-based identifiers of answer options, chosen by the user. May be empty if the user retracted their vote.');
-                $table->dateTime('created_at')->nullable()->comment('Entry date creation');
+                $table->bigInteger('poll_id')->unsigned()->comment('Unique poll identifier');
+                $table->bigInteger('user_id')->comment('The user, who changed the answer to the poll');
+                $table->text('option_ids')->comment('0-based identifiers of answer options, chosen by the user. May be empty if the user retracted their vote.');
+                $table->timestamp('created_at')->nullable()->comment('Entry date creation');
+                $table->primary(['poll_id', 'user_id']);
                 $table->foreign('poll_id', 'poll_answer_ibfk_1')->references('id')->on($this->prefix . 'poll')->onUpdate('RESTRICT')->onDelete('RESTRICT');
             });
 

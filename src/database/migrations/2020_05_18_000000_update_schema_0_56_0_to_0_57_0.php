@@ -17,7 +17,7 @@ class UpdateSchema0560To0570 extends Migration
                 $table->bigInteger('user_id')->index('user_id')->comment('User who sent the query');
                 $table->char('invoice_payload', 255)->default('')->comment('Bot specified invoice payload');
                 $table->char('shipping_address', 255)->default('')->comment('User specified shipping address');
-                $table->dateTime('created_at')->nullable()->comment('Entry date creation');
+                $table->timestamp('created_at')->nullable()->comment('Entry date creation');
                 $table->foreign('user_id', 'shipping_query_ibfk_1')->references('id')->on($this->prefix . 'user')->onUpdate('RESTRICT')->onDelete('RESTRICT');
             });
 
@@ -27,9 +27,9 @@ class UpdateSchema0560To0570 extends Migration
                 $table->char('currency', 3)->comment('Three-letter ISO 4217 currency code');
                 $table->bigInteger('total_amount')->comment('Total price in the smallest units of the currency');
                 $table->char('invoice_payload', 255)->default('')->comment('Bot specified invoice payload');
-                $table->char('shipping_option_id', 255)->comment('Identifier of the shipping option chosen by the user');
-                $table->text('order_info')->comment('Order info provided by the user');
-                $table->dateTime('created_at')->nullable()->comment('Entry date creation');
+                $table->char('shipping_option_id', 255)->nullable()->comment('Identifier of the shipping option chosen by the user');
+                $table->text('order_info')->nullable()->comment('Order info provided by the user');
+                $table->timestamp('created_at')->nullable()->comment('Entry date creation');
                 $table->foreign('user_id', 'pre_checkout_query_ibfk_1')->references('id')->on($this->prefix . 'user')->onUpdate('RESTRICT')->onDelete('RESTRICT');
             });
 
@@ -37,8 +37,8 @@ class UpdateSchema0560To0570 extends Migration
                 $table->bigInteger('id')->unsigned()->primary()->comment('Unique poll identifier');
                 $table->char('question', 255)->comment('Poll question');
                 $table->text('options')->comment('List of poll options');
-                $table->tinyInteger('is_closed')->default(0)->comment('True, if the poll is closed');
-                $table->dateTime('created_at')->nullable()->comment('Entry date creation');
+                $table->boolean('is_closed')->default(0)->comment('True, if the poll is closed');
+                $table->timestamp('created_at')->nullable()->comment('Entry date creation');
             });
 
             Schema::table($this->prefix . 'callback_query', static function (Blueprint $table) {
@@ -54,10 +54,10 @@ class UpdateSchema0560To0570 extends Migration
             Schema::table($this->prefix . 'message', static function (Blueprint $table) {
                 $table->text('forward_signature')->nullable()->default(null)->comment('For messages forwarded from channels, signature of the post author if present')->after('forward_from_message_id');
                 $table->text('forward_sender_name')->nullable()->default(null)->comment('Sender\'s name for messages forwarded from users who disallow adding a link to their account in forwarded messages')->after('forward_signature');
-                $table->unsignedBigInteger('edit_date')->default(null)->comment('Date the message was last edited in Unix time')->after('reply_to_message');
-                $table->text('author_signature')->comment('Signature of the post author for messages in channels')->after('media_group_id');
-                $table->text('caption_entities')->comment('For messages with a caption, special entities like usernames, URLs, bot commands, etc. that appear in the caption')->after('entities');
-                $table->text('poll')->comment('Poll object. Message is a native poll, information about the poll')->after('venue');
+                $table->unsignedBigInteger('edit_date')->nullable()->comment('Date the message was last edited in Unix time')->after('reply_to_message');
+                $table->text('author_signature')->nullable()->comment('Signature of the post author for messages in channels')->after('media_group_id');
+                $table->text('caption_entities')->nullable()->comment('For messages with a caption, special entities like usernames, URLs, bot commands, etc. that appear in the caption')->after('entities');
+                $table->text('poll')->nullable()->comment('Poll object. Message is a native poll, information about the poll')->after('venue');
                 $table->text('invoice')->nullable()->comment('Message is an invoice for a payment, information about the invoice')->after('pinned_message');
                 $table->text('successful_payment')->nullable()->comment('Message is a service message about a successful payment, information about the payment')->after('invoice');
             });

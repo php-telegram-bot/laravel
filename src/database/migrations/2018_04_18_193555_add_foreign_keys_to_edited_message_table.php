@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class AddForeignKeysToEditedMessageTable extends Migration
 {
-    public function up()
+    public function up(): void
     {
         Schema::table('edited_message', static function (Blueprint $table) {
             $table->foreign('chat_id', 'edited_message_ibfk_1')->references('id')->on('chat')->onUpdate('RESTRICT')->onDelete('RESTRICT');
@@ -16,7 +17,7 @@ class AddForeignKeysToEditedMessageTable extends Migration
         });
     }
 
-    public function down()
+    public function down(): void
     {
         Schema::table('edited_message', static function (Blueprint $table) {
             $table->dropForeign('edited_message_ibfk_1');

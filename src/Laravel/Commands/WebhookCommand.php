@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the PhpTelegramBot/Laravel package.
+ *
+ * (c) Avtandil Kikabidze aka LONGMAN <akalongman@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
 namespace PhpTelegramBot\Laravel\Commands;
@@ -25,10 +34,10 @@ class WebhookCommand extends Command
         $this->telegramBot = $telegramBot;
     }
 
-    public function handle()
+    public function handle(): void
     {
         $webhook = $this->argument('webhook');
-        $delete = $this->option('delete');
+        $delete  = $this->option('delete');
 
         if (! ($webhook || $delete)) {
             $this->error('Not enough arguments!');
@@ -39,7 +48,7 @@ class WebhookCommand extends Command
         if ($delete) {
             try {
                 $this->telegramBot->deleteWebhook();
-                $this->info('Webhook deleted succesfully!');
+                $this->info('Webhook deleted successfully!');
             } catch (TelegramException $e) {
                 $this->error("Couldn't delete webhook");
                 $this->error($e->getMessage());
@@ -47,11 +56,10 @@ class WebhookCommand extends Command
             }
         }
 
-
         if ($webhook) {
             try {
                 $this->telegramBot->setWebhook($webhook);
-                $this->info('Webhook set succesfully!');
+                $this->info('Webhook set successfully!');
             } catch (TelegramException $e) {
                 $this->error("Couldn't set webhook");
                 $this->error($e->getMessage());

@@ -1,11 +1,10 @@
 language: php
+sudo: false
 
 php:
-    - 7.2
-    - 7.3
-    - 7.4
-
-sudo: false
+  - 7.2
+  - 7.3
+  - 7.4
 
 before_install:
   - composer self-update
@@ -17,7 +16,6 @@ script:
   - ./vendor/bin/phpcs --standard=phpcs.xml -spn --encoding=utf-8 src/ --report-width=150
   - ./vendor/bin/phpunit --coverage-clover build/logs/clover.xml
 
-
 after_script:
   - wget https://scrutinizer-ci.com/ocular.phar
   - then php ocular.phar code-coverage:upload --format=php-clover build/logs/clover.xml
@@ -25,7 +23,6 @@ after_script:
 matrix:
   fast_finish: true
 
-
 notifications:
-    on_success: never
-    on_failure: always
+  on_success: never
+  on_failure: always

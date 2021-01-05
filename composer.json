@@ -1,7 +1,7 @@
 {
     "name": "php-telegram-bot/laravel",
     "type": "library",
-    "description": "Package to integrate PHP Telegram Bot library in Laravel 6.x",
+    "description": "Package to integrate PHP Telegram Bot library in Laravel 6.x, 7.x, 8.x",
     "keywords": [
         "laravel",
         "telegram",
@@ -18,20 +18,29 @@
             "name": "Avtandil Kikabidze aka LONGMAN",
             "email": "akalongman@gmail.com",
             "homepage": "http://longman.me",
-            "role": "Maintainer, Developer"
+            "role": "Developer"
+        },
+        {
+            "name": "Armando Lüscher",
+            "email": "armando@noplanman.ch",
+            "homepage": "https://noplanman.ch",
+            "role": "Developer"
+        },
+        {
+            "name": "PHP Telegram Bot Community",
+            "homepage": "https://github.com/php-telegram-bot/laravel/graphs/contributors",
+            "role": "Developer"
         }
     ],
     "require": {
-        "php": "^7.2",
-        "illuminate/database": "^6.0|^7.0",
-        "illuminate/support": "^6.0|^7.0",
-        "longman/telegram-bot": "^0.61"
+        "php": "^7.3|^8.0",
+        "illuminate/database": "^6.0|^7.0|^8.0",
+        "illuminate/support": "^6.0|^7.0|^8.0",
+        "longman/telegram-bot": "^0.70"
     },
     "require-dev": {
-        "mockery/mockery": "~1.2",
-        "phpunit/phpunit": "~8.0",
         "longman/php-code-style": "^3.0",
-        "graham-campbell/testbench": "^5.3"
+        "graham-campbell/testbench": "^5.5"
     },
     "autoload": {
         "psr-4": {
@@ -57,10 +66,10 @@
             "vendor/bin/phpunit --coverage-html public/coverage"
         ],
         "phpcs": [
-            "vendor/bin/phpcs --standard=phpcs.xml -spn --encoding=utf-8 src/ tests/ --report-width=150"
+            "vendor/bin/phpcs -spn --encoding=utf-8 src/ tests/ --report-width=150"
         ],
         "phpcbf": [
-            "vendor/bin/phpcbf --standard=phpcs.xml -spn --encoding=utf-8 src/ tests/ --report-width=150"
+            "vendor/bin/phpcbf -spn --encoding=utf-8 src/ tests/ --report-width=150"
         ]
     },
     "extra": {

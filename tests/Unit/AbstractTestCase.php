@@ -15,7 +15,7 @@ abstract class AbstractTestCase extends AbstractPackageTestCase
      * @param  \Illuminate\Contracts\Foundation\Application $app
      * @return string
      */
-    protected function getServiceProviderClass($app)
+    protected function getServiceProviderClass($app): string
     {
         return ServiceProvider::class;
     }

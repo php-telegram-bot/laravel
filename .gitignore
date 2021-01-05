@@ -15,7 +15,9 @@ composer.lock
 /tmp
 
 # Test Related Files #
+/phpcs.xml
 /phpunit.xml
+/.phpunit.result.cache
 
 # Composer
 vendor/

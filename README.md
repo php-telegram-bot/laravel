@@ -1,4 +1,4 @@
-# Telegram Bot Package for Laravel 6.x
+# Telegram Bot Package for Laravel 6.x, 7.x, 8.x
 
 [![Build Status](https://travis-ci.org/php-telegram-bot/laravel.svg?branch=master)](https://travis-ci.org/php-telegram-bot/laravel)
 [![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/php-telegram-bot/laravel/master.svg?style=flat-square)](https://scrutinizer-ci.com/g/php-telegram-bot/laravel/?b=master)
@@ -6,7 +6,7 @@
 [![Latest Stable Version](https://img.shields.io/packagist/v/php-telegram-bot/laravel.svg)](https://packagist.org/packages/php-telegram-bot/laravel)
 [![Total Downloads](https://img.shields.io/packagist/dt/php-telegram-bot/laravel.svg)](https://packagist.org/packages/php-telegram-bot/laravel)
 [![Downloads Month](https://img.shields.io/packagist/dm/php-telegram-bot/laravel.svg)](https://packagist.org/packages/php-telegram-bot/laravel)
-[![Minimum PHP Version](http://img.shields.io/badge/php-%3E%3D5.5.9-8892BF.svg)](https://php.net/)
+[![Minimum PHP Version](http://img.shields.io/badge/php-%3E%3D7.3-8892BF.svg)](https://php.net/)
 [![License](https://img.shields.io/packagist/l/php-telegram-bot/laravel.svg)](https://github.com/php-telegram-bot/laravel/LICENSE.md)
 
 This package helps easily integrate [PHP Telegram Bot](https://github.com/php-telegram-bot/core) library in Laravel application.
@@ -50,16 +50,17 @@ After run migration command
 
     php artisan migrate
 
-In the config you have to specify Telegram API KEY
+In the config you have to specify your Telegram API Key.
 
 ## Usage
 
-You can inject `PhpTelegramBot\Laravel\PhpTelegramBotContract` in anywhere and use bot instance
+You can inject `PhpTelegramBot\Laravel\PhpTelegramBotContract` anywhere and use the bot instance.
 
 For example:
 
 ```php
 <?php
+
 namespace App\Http\Controllers;
 
 use PhpTelegramBot\Laravel\PhpTelegramBotContract;
@@ -79,10 +80,9 @@ class CustomController extends Controller
         $telegramBot->handleGetUpdates();
     }
 }
-
 ```
 
-More details about usage you can see on the PHP Telegram Bot docs: https://github.com/php-telegram-bot/core#instructions
+For more details about usage, see the PHP Telegram Bot docs: https://github.com/php-telegram-bot/core#instructions
 
 ## TODO
 
@@ -90,21 +90,18 @@ write more tests
 
 ## Troubleshooting
 
-If you like living on the edge, please report any bugs you find on the
-[php-telegram-bot/laravel issues](https://github.com/php-telegram-bot/laravel/issues) page.
+If you like living on the edge, please report any bugs you find on the [php-telegram-bot/laravel issues](https://github.com/php-telegram-bot/laravel/issues) page.
 
 ## Contributing
 
-Pull requests are welcome.
+Pull requests welcome!
+
 See [CONTRIBUTING.md](CONTRIBUTING.md) for information.
 
 ## License
 
-Please see the [LICENSE](LICENSE.md) included in this repository for a full copy of the MIT license,
-which this project is licensed under.
+Please see the [LICENSE](LICENSE.md) included in this repository for a full copy of the MIT license, which this project is licensed under.
 
 ## Credits
 
-- [Avtandil Kikabidze aka LONGMAN](https://github.com/akalongman)
-
-Full credit list in [CREDITS](CREDITS)
+Credit list in [CREDITS](CREDITS)

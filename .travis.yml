@@ -1,10 +1,24 @@
+dist: bionic
 language: php
-sudo: false
+
+cache:
+  directories:
+    - vendor
+    - $HOME/.composer/cache
 
 php:
-  - 7.2
   - 7.3
   - 7.4
+  - 8.0snapshot
+  - nightly
+
+jobs:
+  allow_failures:
+    - php: nightly
+  fast_finish: true
+
+git:
+  depth: 1
 
 before_install:
   - composer self-update
@@ -13,15 +27,12 @@ install:
   - travis_retry composer update --no-interaction --prefer-source
 
 script:
-  - ./vendor/bin/phpcs --standard=phpcs.xml -spn --encoding=utf-8 src/ --report-width=150
+  - ./vendor/bin/phpcs -spn --encoding=utf-8 src/ --report-width=150
   - ./vendor/bin/phpunit --coverage-clover build/logs/clover.xml
 
 after_script:
   - wget https://scrutinizer-ci.com/ocular.phar
   - then php ocular.phar code-coverage:upload --format=php-clover build/logs/clover.xml
-
-matrix:
-  fast_finish: true
 
 notifications:
   on_success: never

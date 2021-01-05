@@ -33,8 +33,4 @@ script:
 
 after_script:
   - wget https://scrutinizer-ci.com/ocular.phar
-  - then php ocular.phar code-coverage:upload --format=php-clover build/logs/clover.xml
-
-notifications:
-  on_success: never
-  on_failure: always
+  - php ocular.phar code-coverage:upload --format=php-clover build/logs/clover.xml

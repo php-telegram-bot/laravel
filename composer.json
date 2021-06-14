@@ -1,7 +1,7 @@
 {
     "name": "tii/laravel-telegram-bot",
     "description": "Integrates PHP Telegram Bot into Laravel.",
-    "license": "license",
+    "license": "MIT",
     "authors": [
         {
             "name": "Tii",

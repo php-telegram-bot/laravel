@@ -1,0 +1,28 @@
+<?php
+
+
+namespace DummyNamespace;
+
+
+use Longman\TelegramBot\Commands\DummyParent;
+use Longman\TelegramBot\Entities\ServerResponse;
+use Longman\TelegramBot\Exception\TelegramException;
+
+class DummyClass extends DummyParent
+{
+
+    /** @var string Command name */
+    protected $name = '{{name}}';
+    /** @var string Command description */
+    protected $description = '';
+    /** @var string Usage description */
+    protected $usage = '/{{name}}';
+    /** @var string Version */
+    protected $version = '1.0.0';
+
+    public function execute(): ServerResponse
+    {
+
+    }
+
+}

@@ -1,5 +1,5 @@
 <?php
 
-Route::post('/api/telegram', static function (\Longman\TelegramBot\Telegram $bot) {
+Route::any('/api/telegram', static function (\Longman\TelegramBot\Telegram $bot) {
     $bot->handle();
-})->name('telegram.webhook');
+})->middleware('telegram.network')->name('telegram.webhook');

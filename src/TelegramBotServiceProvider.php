@@ -2,6 +2,7 @@
 
 namespace Tii\LaravelTelegramBot;
 
+use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
 use Longman\TelegramBot\Commands\Command;
 use Longman\TelegramBot\Telegram;
@@ -9,6 +10,7 @@ use Symfony\Component\Finder\Finder;
 use Tii\LaravelTelegramBot\Console\Commands\BotPublishCommand;
 use Tii\LaravelTelegramBot\Console\Commands\BotTunnelCommand;
 use Tii\LaravelTelegramBot\Console\Commands\TelegramCommandMakeCommand;
+use Tii\LaravelTelegramBot\Http\Middleware\TrustTelegramNetwork;
 
 class TelegramBotServiceProvider extends ServiceProvider
 {
@@ -26,6 +28,9 @@ class TelegramBotServiceProvider extends ServiceProvider
         } else {
             $this->loadRoutesFrom(__DIR__ . '/../routes/telegram.php');
         }
+
+        $router = $this->app->make(Router::class);
+        $router->aliasMiddleware('telegram.network', TrustTelegramNetwork::class);
 
         // Publishing is only necessary when using the CLI.
         if ($this->app->runningInConsole()) {

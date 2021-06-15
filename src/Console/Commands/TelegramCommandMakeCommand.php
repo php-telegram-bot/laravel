@@ -52,11 +52,11 @@ class TelegramCommandMakeCommand extends GeneratorCommand
 
     protected function getParentClassName()
     {
-        if ($this->hasOption('admin')) {
+        if ($this->option('admin')) {
             return 'AdminCommand';
         }
 
-        if ($this->hasOption('system')) {
+        if ($this->option('system')) {
             return 'SystemCommand';
         }
 

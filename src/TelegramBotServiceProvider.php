@@ -66,9 +66,9 @@ class TelegramBotServiceProvider extends ServiceProvider
         // Registering package commands.
         $this->commands([
             BotPublishCommand::class,
-            BotTunnelCommand::class,
             BotRegisterCommand::class,
             BotTransferCommand::class,
+            BotTunnelCommand::class,
             TelegramCommandMakeCommand::class
         ]);
     }

@@ -14,7 +14,7 @@ class TrustTelegramNetwork
      * @see https://core.telegram.org/bots/webhooks#the-short-version
      * @var array
      */
-    protected array $trustedIPs = [
+    protected array $trustedIpNets = [
         '149.154.160.0/20',
         '91.108.4.0/22'
     ];
@@ -23,7 +23,7 @@ class TrustTelegramNetwork
      * Local networks for debugging
      * @var array|string[]
      */
-    protected array $localIPs = [
+    protected array $localIpNets = [
         '127.0.0.1/32',
         '10.0.0.0/8',
         '172.16.0.0/12',
@@ -39,15 +39,14 @@ class TrustTelegramNetwork
      */
     public function handle($request, Closure $next)
     {
-        if (App::environment('local') && IpUtils::checkIp($request->ip(), $this->localIPs)) {
+        if (App::environment('local') && IpUtils::checkIp($request->ip(), $this->localIpNets)) {
             return $next($request);
         }
 
-        abort_unless(
-            IpUtils::checkIp($request->ip(), $this->trustedIPs),
-            403
-        );
+        if (IpUtils::checkIp($request->ip(), $this->trustedIpNets)) {
+            return $next($request);
+        }
 
-        return $next($request);
+        abort(403);
     }
 }

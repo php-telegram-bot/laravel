@@ -3,7 +3,6 @@
 namespace Tii\LaravelTelegramBot;
 
 use Illuminate\Routing\Router;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\ServiceProvider;
 use Longman\TelegramBot\Commands\Command;
 use Longman\TelegramBot\Request;
@@ -15,7 +14,7 @@ use Tii\LaravelTelegramBot\Console\Commands\BotTransferCommand;
 use Tii\LaravelTelegramBot\Console\Commands\BotTunnelCommand;
 use Tii\LaravelTelegramBot\Console\Commands\TelegramCommandMakeCommand;
 use Tii\LaravelTelegramBot\Http\Middleware\TrustTelegramNetwork;
-use function PHPUnit\Framework\isNull;
+use Tii\LaravelTelegramBot\Telegram\Commands\GenericmessageCommand;
 
 class TelegramBotServiceProvider extends ServiceProvider
 {
@@ -91,6 +90,7 @@ class TelegramBotServiceProvider extends ServiceProvider
             $bot = new Telegram($token, $username);
 
             // Commands Discovery
+            $bot->addCommandClass(GenericmessageCommand::class);
             $this->discoverTelegramCommands($bot);
 
             // Set MySQL Connection

@@ -50,10 +50,6 @@ class TelegramBotServiceProvider extends ServiceProvider
      */
     protected function bootForConsole(): void
     {
-        $this->publishes([
-            __DIR__ . '/Telegram/Commands' => app_path('Telegram/Commands')
-        ], 'telegram');
-
         // Publishing the configuration file.
         $this->publishes([
             __DIR__ . '/../config/telegram.php' => config_path('telegram.php'),

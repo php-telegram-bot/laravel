@@ -3,6 +3,7 @@
 namespace Tii\LaravelTelegramBot\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Filesystem\Filesystem;
 
 class BotPublishCommand extends Command
 {
@@ -12,20 +13,30 @@ class BotPublishCommand extends Command
 
     public function handle()
     {
-        $this->callSilent('vendor:publish', ['--tag' => 'telegram']);
-
-        $namespace = $this->laravel->getNamespace();
-        $this->replaceInFile(
-            "namespace App\\Telegram\\Commands;",
-            "namespace {$namespace}Telegram\\Commands;",
-            app_path('Telegram/Commands/StartCommand.php'));
+        (new Filesystem())->ensureDirectoryExists(app_path('Telegram/Commands'));
+        $this->publish(__DIR__ . '/stubs/example-start-command.stub', app_path('Telegram/Commands/StartCommand.php'));
 
         $this->info('Publishing complete.');
     }
 
-    protected function replaceInFile($search, $replace, $path)
+    protected function publish($source, $destination)
     {
-        file_put_contents($path, str_replace($search, $replace, file_get_contents($path)));
+        $content = file_get_contents($source);
+        $content = $this->replacePlaceholder($content);
+        file_put_contents($destination, $content);
+    }
+
+    protected function replacePlaceholder($content): string
+    {
+        $namespace = \Str::of($this->laravel->getNamespace())->rtrim('\\');
+
+        $content = str_replace(
+            ['DummyRootNamespace'],
+            [$namespace],
+            $content
+        );
+
+        return $content;
     }
 
 }

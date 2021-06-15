@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Telegram\Commands;
+namespace DummyRootNamespace\Telegram\Commands;
 
 
 use Longman\TelegramBot\Commands\UserCommand;

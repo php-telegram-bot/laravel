@@ -3,14 +3,19 @@
 namespace Tii\LaravelTelegramBot;
 
 use Illuminate\Routing\Router;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\ServiceProvider;
 use Longman\TelegramBot\Commands\Command;
+use Longman\TelegramBot\Request;
 use Longman\TelegramBot\Telegram;
 use Symfony\Component\Finder\Finder;
 use Tii\LaravelTelegramBot\Console\Commands\BotPublishCommand;
+use Tii\LaravelTelegramBot\Console\Commands\BotRegisterCommand;
+use Tii\LaravelTelegramBot\Console\Commands\BotTransferCommand;
 use Tii\LaravelTelegramBot\Console\Commands\BotTunnelCommand;
 use Tii\LaravelTelegramBot\Console\Commands\TelegramCommandMakeCommand;
 use Tii\LaravelTelegramBot\Http\Middleware\TrustTelegramNetwork;
+use function PHPUnit\Framework\isNull;
 
 class TelegramBotServiceProvider extends ServiceProvider
 {
@@ -39,36 +44,6 @@ class TelegramBotServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register any package services.
-     *
-     * @return void
-     */
-    public function register(): void
-    {
-        $this->mergeConfigFrom(__DIR__ . '/../config/telegram.php', 'telegram');
-        $this->mergeConfigFrom(__DIR__ . '/../config/expose.php', 'expose');
-
-        $this->app->singleton(Telegram::class, function () {
-            $token = config('telegram.bot.api_token');
-            $username = config('telegram.bot.username');
-
-            $bot = new Telegram($token, $username);
-
-            // Commands Discovery
-            $this->discoverTelegramCommands($bot);
-
-            // Set MySQL Connection
-            $connection = app('db')->connection('mysql');
-            $bot->enableExternalMySql($connection->getPdo(), 'bot_');
-
-            // Register admins
-            $this->registerTelegramAdmins($bot);
-
-            return $bot;
-        });
-    }
-
-    /**
      * Console-specific booting.
      *
      * @return void
@@ -90,10 +65,47 @@ class TelegramBotServiceProvider extends ServiceProvider
 
         // Registering package commands.
         $this->commands([
-            BotTunnelCommand::class,
             BotPublishCommand::class,
+            BotTunnelCommand::class,
+            BotRegisterCommand::class,
+            BotTransferCommand::class,
             TelegramCommandMakeCommand::class
         ]);
+    }
+
+    /**
+     * Register any package services.
+     *
+     * @return void
+     */
+    public function register(): void
+    {
+        $this->mergeConfigFrom(__DIR__ . '/../config/telegram.php', 'telegram');
+        $this->mergeConfigFrom(__DIR__ . '/../config/expose.php', 'expose');
+
+        $this->app->singleton(Telegram::class, function () {
+            $token = config('telegram.bot.api_token');
+            $username = config('telegram.bot.username');
+
+            $apiUrl = config('telegram.bot.api_url', '');
+            if (! empty($apiUrl)) {
+                Request::setCustomBotApiUri($apiUrl);
+            }
+
+            $bot = new Telegram($token, $username);
+
+            // Commands Discovery
+            $this->discoverTelegramCommands($bot);
+
+            // Set MySQL Connection
+            $connection = app('db')->connection('mysql');
+            $bot->enableExternalMySql($connection->getPdo(), 'bot_');
+
+            // Register admins
+            $this->registerTelegramAdmins($bot);
+
+            return $bot;
+        });
     }
 
     /**

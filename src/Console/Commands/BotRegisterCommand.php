@@ -21,7 +21,7 @@ class BotRegisterCommand extends Command
                     'local' => 'http',
                     default => 'https'
                 };
-                $url = "{$schema}://{$hostname}";
+                $url = "{$schema}://{$url}";
             }
 
             $url .= route('telegram.webhook', [], false);

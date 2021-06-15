@@ -4,6 +4,7 @@ namespace Tii\LaravelTelegramBot\Console\Commands;
 
 use Illuminate\Console\Command;
 use Longman\TelegramBot\Telegram;
+use Str;
 
 class BotRegisterCommand extends Command
 {

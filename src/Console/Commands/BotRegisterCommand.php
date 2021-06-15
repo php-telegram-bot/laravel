@@ -29,6 +29,8 @@ class BotRegisterCommand extends Command
             $url = route('telegram.webhook');
         }
 
+        $this->info($url);
+
         $response = $bot->setWebhook($url);
 
         if (! $response->isOk()) {

@@ -4,7 +4,6 @@
 namespace Tii\LaravelTelegramBot\Telegram\Commands;
 
 
-use Illuminate\Support\Facades\Log;
 use Longman\TelegramBot\Commands\SystemCommand;
 use Longman\TelegramBot\Entities\ServerResponse;
 use Longman\TelegramBot\Request;
@@ -24,7 +23,7 @@ class GenericmessageCommand extends SystemCommand
 
         // Check if GenericmessageCommand is defined
         $class = app()->getNamespace() . 'Telegram\Commands\GenericmessageCommand';
-        if (class_exists($class)) {
+        if (is_subclass_of($this, SystemCommand::class)) {
             return (new $class($this->telegram, $this->update))->execute();
         }
 

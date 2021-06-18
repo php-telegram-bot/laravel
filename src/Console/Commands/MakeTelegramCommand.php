@@ -32,7 +32,7 @@ class MakeTelegramCommand extends GeneratorCommand
 
         $class = Str::studly($name) . 'Command';
 
-        $this->publish(
+        $success = $this->publish(
             __DIR__ . '/stubs/telegram-command.stub',
             app_path("Telegram/Commands/{$class}.php"),
             [
@@ -42,6 +42,10 @@ class MakeTelegramCommand extends GeneratorCommand
                 '{{name}}'       => $name
             ]
         );
+
+        if ($success) {
+            $this->info('Telegram Command created successfully');
+        }
     }
 
     protected function getParentClassName()

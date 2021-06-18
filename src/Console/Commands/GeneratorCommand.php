@@ -5,22 +5,23 @@ namespace Tii\LaravelTelegramBot\Console\Commands;
 
 
 use Illuminate\Console\Command;
-use Illuminate\Support\Str;
 
 abstract class GeneratorCommand extends Command
 {
 
-    protected function publish(string $source, string $destination, array $replacements = [], bool $overwrite = false)
+    protected function publish(string $source, string $destination, array $replacements = [], bool $overwrite = false) : bool
     {
         if (file_exists($destination) && ! $overwrite) {
             $basename = basename($destination);
-            $this->error("File {$basename} already exists");
-            return;
+            $this->error("{$basename} already exists!");
+            return false;
         }
 
         $content = file_get_contents($source);
         $content = $this->replacePlaceholder($content, $replacements);
         file_put_contents($destination, $content);
+
+        return true;
     }
 
     protected function replacePlaceholder(string $content, array $replacements): string

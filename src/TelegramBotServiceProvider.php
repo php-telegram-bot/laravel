@@ -10,12 +10,12 @@ use Longman\TelegramBot\Telegram;
 use Symfony\Component\Finder\Finder;
 use Tii\LaravelTelegramBot\Console\Commands\BotCloseCommand;
 use Tii\LaravelTelegramBot\Console\Commands\BotDeleteWebhookCommand;
+use Tii\LaravelTelegramBot\Console\Commands\BotLogoutCommand;
 use Tii\LaravelTelegramBot\Console\Commands\BotPublishCommand;
 use Tii\LaravelTelegramBot\Console\Commands\BotSetWebhookCommand;
 use Tii\LaravelTelegramBot\Console\Commands\BotTransferCommand;
 use Tii\LaravelTelegramBot\Console\Commands\BotTunnelCommand;
-use Tii\LaravelTelegramBot\Console\Commands\TelegramCommandMakeCommand;
-use Tii\LaravelTelegramBot\Console\Commands\BotLogoutCommand;
+use Tii\LaravelTelegramBot\Console\Commands\MakeTelegramCommand;
 use Tii\LaravelTelegramBot\Http\Middleware\TrustTelegramNetwork;
 use Tii\LaravelTelegramBot\Telegram\Commands\GenericmessageCommand;
 
@@ -43,34 +43,6 @@ class TelegramBotServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->bootForConsole();
         }
-    }
-
-    /**
-     * Console-specific booting.
-     *
-     * @return void
-     */
-    protected function bootForConsole(): void
-    {
-        // Publishing the configuration file.
-        $this->publishes([
-            __DIR__ . '/../config/telegram.php' => config_path('telegram.php'),
-        ], 'telegram-config');
-
-        $this->publishes([
-            __DIR__ . '/../routes/telegram.php' => base_path('routes/telegram.php')
-        ], 'telegram-routes');
-
-        // Registering package commands.
-        $this->commands([
-            BotCloseCommand::class,
-            BotDeleteWebhookCommand::class,
-            BotLogoutCommand::class,
-            BotPublishCommand::class,
-            BotSetWebhookCommand::class,
-            BotTunnelCommand::class,
-            TelegramCommandMakeCommand::class,
-        ]);
     }
 
     /**
@@ -107,6 +79,34 @@ class TelegramBotServiceProvider extends ServiceProvider
 
             return $bot;
         });
+    }
+
+    /**
+     * Console-specific booting.
+     *
+     * @return void
+     */
+    protected function bootForConsole(): void
+    {
+        // Publishing the configuration file.
+        $this->publishes([
+            __DIR__ . '/../config/telegram.php' => config_path('telegram.php'),
+        ], 'telegram-config');
+
+        $this->publishes([
+            __DIR__ . '/../routes/telegram.php' => base_path('routes/telegram.php')
+        ], 'telegram-routes');
+
+        // Registering package commands.
+        $this->commands([
+            BotCloseCommand::class,
+            BotDeleteWebhookCommand::class,
+            BotLogoutCommand::class,
+            BotPublishCommand::class,
+            BotSetWebhookCommand::class,
+            BotTunnelCommand::class,
+            MakeTelegramCommand::class,
+        ]);
     }
 
     /**

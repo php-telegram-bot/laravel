@@ -1,7 +1,7 @@
 <?php
 
 
-namespace DummyNamespace;
+namespace DummyNamespace\Telegram\Commands;
 
 
 use Longman\TelegramBot\Commands\DummyParent;

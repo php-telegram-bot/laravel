@@ -8,11 +8,14 @@ use Longman\TelegramBot\Commands\Command;
 use Longman\TelegramBot\Request;
 use Longman\TelegramBot\Telegram;
 use Symfony\Component\Finder\Finder;
+use Tii\LaravelTelegramBot\Console\Commands\BotCloseCommand;
+use Tii\LaravelTelegramBot\Console\Commands\BotDeleteWebhookCommand;
 use Tii\LaravelTelegramBot\Console\Commands\BotPublishCommand;
-use Tii\LaravelTelegramBot\Console\Commands\BotRegisterCommand;
+use Tii\LaravelTelegramBot\Console\Commands\BotSetWebhookCommand;
 use Tii\LaravelTelegramBot\Console\Commands\BotTransferCommand;
 use Tii\LaravelTelegramBot\Console\Commands\BotTunnelCommand;
 use Tii\LaravelTelegramBot\Console\Commands\TelegramCommandMakeCommand;
+use Tii\LaravelTelegramBot\Console\Commands\BotLogoutCommand;
 use Tii\LaravelTelegramBot\Http\Middleware\TrustTelegramNetwork;
 use Tii\LaravelTelegramBot\Telegram\Commands\GenericmessageCommand;
 
@@ -60,11 +63,13 @@ class TelegramBotServiceProvider extends ServiceProvider
 
         // Registering package commands.
         $this->commands([
+            BotCloseCommand::class,
+            BotDeleteWebhookCommand::class,
+            BotLogoutCommand::class,
             BotPublishCommand::class,
-            BotRegisterCommand::class,
-            BotTransferCommand::class,
+            BotSetWebhookCommand::class,
             BotTunnelCommand::class,
-            TelegramCommandMakeCommand::class
+            TelegramCommandMakeCommand::class,
         ]);
     }
 

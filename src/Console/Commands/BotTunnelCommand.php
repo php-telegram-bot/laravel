@@ -4,22 +4,21 @@ namespace Tii\LaravelTelegramBot\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
-use Longman\TelegramBot\Exception\TelegramException;
+use Illuminate\Support\Str;
 use Longman\TelegramBot\Request;
 use Longman\TelegramBot\Telegram;
-use Str;
 use Symfony\Component\Console\Command\SignalableCommandInterface;
 use Symfony\Component\Process\Process;
 
 class BotTunnelCommand extends Command implements SignalableCommandInterface
 {
-    protected $signature = 'bot:tunnel {--s|subdomain=}';
+    protected $signature = 'bot:tunnel';
 
     protected $description = 'Creates a tunnel for local development.';
 
     public function handle(Telegram $bot)
     {
-        $subdomain = $this->option('subdomain') ?: \Str::kebab(config('app.name'));
+        $subdomain = config('expose.subdomain') ?? Str::kebab(config('app.name'));
         $exposeHost = config('expose.host');
         $exposePort = config('expose.port');
         $exposeToken = config('expose.token');
@@ -57,15 +56,12 @@ class BotTunnelCommand extends Command implements SignalableCommandInterface
         }
 
         // Register Webhook to Telegram
-        $webhookUrl = $host . route('telegram.webhook', [], false);
-        try {
-            $bot->setWebhook($webhookUrl, [
-                'drop_pending_updates' => true
-            ]);
-        } catch (TelegramException $e) {
-            $this->error($e->getMessage());
-            return;
-        }
+        $webhookUrl = $host . route('telegram.webhook', [
+                'token' => config('telegram.bot.api_token')
+            ], false);
+        $bot->setWebhook($webhookUrl, [
+            'drop_pending_updates' => true
+        ]);
 
         $this->info('Registered Telegram Webhook on <comment>' . $webhookUrl . '</comment>');
         $process->wait();

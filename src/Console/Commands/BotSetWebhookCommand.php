@@ -3,14 +3,14 @@
 namespace Tii\LaravelTelegramBot\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Str;
 use Longman\TelegramBot\Telegram;
-use Str;
 
 class BotSetWebhookCommand extends Command
 {
     protected $signature = 'bot:set-webhook
                             {hostname? : Hostname to set}
-                            {--drop-pending-updates : Pass to drop all pending updates}';
+                            {--d|drop-pending-updates : Pass to drop all pending updates}';
 
     protected $description = 'Use this method to specify a url and receive incoming updates via an outgoing webhook';
 

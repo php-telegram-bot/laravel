@@ -2,6 +2,7 @@
 
 namespace Tii\LaravelTelegramBot\Telegram;
 
+use Illuminate\Support\Collection;
 use Longman\TelegramBot\Conversation;
 use Longman\TelegramBot\Entities\ServerResponse;
 use Longman\TelegramBot\Telegram;

@@ -5,8 +5,8 @@ namespace Tii\LaravelTelegramBot;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 use Longman\TelegramBot\Commands\Command;
-use Longman\TelegramBot\Entities\CallbackQuery;
 use Longman\TelegramBot\Entities\InlineKeyboardButton;
+use Tii\LaravelTelegramBot\Telegram\CallbackPayload;
 
 /**
  * Trait CallbackQueryCache
@@ -26,7 +26,7 @@ trait RemembersCallbackPayload
 
         // Assemble button
         $button = new InlineKeyboardButton([
-            'text' => $text,
+            'text'          => $text,
             'callback_data' => $hash
         ]);
 
@@ -37,17 +37,28 @@ trait RemembersCallbackPayload
         return $button;
     }
 
-    protected function getCallbackPayload(CallbackQuery $callbackQuery = null): ?array
-    {
-        $callbackQuery ??= $this->getCallbackQuery();
-        $data = $callbackQuery->getData();
-        $cacheKey = 'CallbackQuery:'.$data;
+    /**
+     * @var CallbackPayload
+     * @internal
+     */
+    private CallbackPayload $payload;
 
-        if (! Cache::has($cacheKey)) {
-            return null;
+    protected function payload(): ?CallbackPayload
+    {
+        if (! isset($this->payload)) {
+            $callbackQuery ??= $this->getCallbackQuery();
+            $data = $callbackQuery->getData();
+            $cacheKey = 'CallbackQuery:'.$data;
+
+            if (! Cache::has($cacheKey)) {
+                return null;
+            }
+
+            $payload = Cache::get($cacheKey);
+            $this->payload = new CallbackPayload($payload);
         }
 
-        return Cache::get($cacheKey);
+        return $this->payload;
     }
 
 }

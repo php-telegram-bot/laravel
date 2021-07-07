@@ -25,8 +25,7 @@ class CallbackqueryCommand extends SystemCommand
         $callbackQuery = $this->getCallbackQuery();
 
         // Check if we have data for that hash in the Cache
-        if ($data = $this->getCallbackPayload()) {
-            $class = $data['__class'] ?? null;
+        if ($class = $this->payload()->get('__class')) {
             if (class_exists($class) && is_subclass_of($class, Command::class)) {
                 /** @var Command $command */
                 $command = new $class($this->telegram, $this->update);

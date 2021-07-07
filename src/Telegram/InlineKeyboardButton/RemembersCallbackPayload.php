@@ -19,7 +19,12 @@ trait RemembersCallbackPayload
      */
     private CallbackPayload $payload;
 
-    protected function payload(string $key = null, string $default = null): ?CallbackPayload
+    /**
+     * @param string|null $key
+     * @param string|null $default
+     * @return CallbackPayload|null|mixed
+     */
+    protected function payload(string $key = null, string $default = null)
     {
         if (! isset($this->payload)) {
             $data = $this->getCallbackQuery()?->getData();

@@ -19,7 +19,12 @@ trait LeadsConversation
      */
     private ConversationWrapper $conversation;
 
-    protected function conversation(string $key = null, string $default = null): ?ConversationWrapper
+    /**
+     * @param string|null $key
+     * @param string|null $default
+     * @return ConversationWrapper|null|mixed
+     */
+    protected function conversation(string $key = null, string $default = null)
     {
         if (! isset($this->conversation)) {
             if ($message = $this->getMessage()) {

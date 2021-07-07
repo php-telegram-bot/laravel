@@ -5,7 +5,6 @@ namespace Tii\LaravelTelegramBot\Telegram\InlineKeyboardButton;
 
 use Illuminate\Support\Facades\Cache;
 use Longman\TelegramBot\Commands\Command;
-use Tii\LaravelTelegramBot\Telegram\CallbackPayload;
 
 /**
  * Trait CallbackQueryCache

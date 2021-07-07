@@ -4,7 +4,6 @@
 namespace Tii\LaravelTelegramBot\Telegram\Conversation;
 
 use Longman\TelegramBot\Commands\Command;
-use Tii\LaravelTelegramBot\Telegram\ConversationWrapper;
 
 /**
  * Trait LeadsConversation

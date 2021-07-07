@@ -21,9 +21,12 @@ class ConversationWrapper
             command: $command
         );
 
+        $notes = &$this->conversation->notes;
+        $notes['vars'] ??= [];
+        $notes['persist'] ??= [];
+
         if ($this->conversation->exists()) {
             // Remove temporary variables
-            $notes = &$this->conversation->notes;
             foreach ($notes['vars'] as $key => $value) {
                 if (array_search($key, $notes['persist']) ===  false) {
                     // Is temporary

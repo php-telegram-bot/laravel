@@ -11,6 +11,7 @@ class ConversationWrapper
 {
 
     protected Conversation $conversation;
+    protected array $temporary = [];
 
     public function __construct($user_id, $chat_id, $command = '')
     {
@@ -19,16 +20,30 @@ class ConversationWrapper
             chat_id: $chat_id,
             command: $command
         );
+
+        if ($this->conversation->exists()) {
+            // Remove temporary variables
+            $notes = &$this->conversation->notes;
+            foreach ($notes['vars'] as $key => $value) {
+                if (array_search($key, $notes['persist']) ===  false) {
+                    // Is temporary
+                    $this->temporary[$key] = $value;
+                    unset($notes['vars'][$key]);
+                }
+            }
+            $this->conversation->update();
+        }
     }
 
     public function all(): array
     {
-        return $this->conversation->notes;
+        return $this->conversation->notes['vars'] + $this->temporary;
     }
 
     public function get(string $key, string $default = null): mixed
     {
-        return data_get($this->conversation->notes, $key, $default);
+        return data_get($this->conversation->notes['vars'], $key)
+            ?? data_get($this->temporary, $key, $default);
     }
 
     public function has(string $key): bool
@@ -41,16 +56,35 @@ class ConversationWrapper
         return $this->conversation;
     }
 
+    public function persist(array $data)
+    {
+        $notes = &$this->conversation->notes;
+        foreach ($data as $key => $value) {
+            $notes['vars'][$key] = $value;
+            $notes['persist'][] = $key;
+        }
+        $this->conversation->update();
+    }
+
     public function remember(array $data, bool $keepPreviousData = false)
     {
-        if (! $keepPreviousData) {
-            $this->conversation->notes = [];
+        $notes = &$this->conversation->notes;
+
+        if ($keepPreviousData) {
+            foreach ($this->temporary as $key => $value) {
+                $notes['vars'][$key] = $value;
+            }
         }
 
         foreach ($data as $key => $value) {
-            $this->conversation->notes[$key] = $value;
+            $notes['vars'][$key] = $value;
+            $index = array_search($key, $notes['persist']);
+            if ($index !== false) {
+                unset($notes['persist'][$index]);
+            }
         }
 
+        $notes['persist'] = array_values($notes['persist']);
         $this->conversation->update();
     }
 

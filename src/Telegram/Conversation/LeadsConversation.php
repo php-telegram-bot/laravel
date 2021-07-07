@@ -4,12 +4,6 @@
 namespace Tii\LaravelTelegramBot;
 
 use Longman\TelegramBot\Commands\Command;
-use Longman\TelegramBot\Conversation;
-use Longman\TelegramBot\Entities\CallbackQuery;
-use Longman\TelegramBot\Entities\Entity;
-use Longman\TelegramBot\Entities\Message;
-use Longman\TelegramBot\Request;
-use Longman\TelegramBot\Telegram;
 use Tii\LaravelTelegramBot\Telegram\ConversationWrapper;
 
 /**
@@ -32,7 +26,7 @@ trait LeadsConversation
             if ($message = $this->getMessage()) {
                 $user = $message->getFrom();
                 $chat = $message->getChat();
-            } else if ($callbackQuery = $this->getCallbackQuery()) {
+            } elseif ($callbackQuery = $this->getCallbackQuery()) {
                 $user = $callbackQuery->getFrom();
                 $chat = $callbackQuery->getMessage()?->getChat();
             } else {

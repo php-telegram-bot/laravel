@@ -4,8 +4,6 @@
 namespace Tii\LaravelTelegramBot\Telegram;
 
 
-use Illuminate\Support\Collection;
-
 class CallbackPayload
 {
 

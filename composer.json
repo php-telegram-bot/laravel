@@ -32,7 +32,10 @@
         "laravel": {
             "providers": [
               "Tii\\LaravelTelegramBot\\TelegramBotServiceProvider"
-            ]
+            ],
+            "aliases": {
+                "CallbackButton": "Tii\\LaravelTelegramBot\\Facades\\CallbackButton"
+            }
         }
     },
     "bin": [

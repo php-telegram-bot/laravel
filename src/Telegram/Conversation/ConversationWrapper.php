@@ -2,10 +2,7 @@
 
 namespace Tii\LaravelTelegramBot\Telegram;
 
-use Illuminate\Support\Collection;
 use Longman\TelegramBot\Conversation;
-use Longman\TelegramBot\Entities\ServerResponse;
-use Longman\TelegramBot\Telegram;
 
 class ConversationWrapper
 {
@@ -28,7 +25,7 @@ class ConversationWrapper
         if ($this->conversation->exists()) {
             // Remove temporary variables
             foreach ($notes['vars'] as $key => $value) {
-                if (array_search($key, $notes['persist']) ===  false) {
+                if (array_search($key, $notes['persist']) === false) {
                     // Is temporary
                     $this->temporary[$key] = $value;
                     unset($notes['vars'][$key]);
@@ -69,7 +66,7 @@ class ConversationWrapper
         $this->conversation->update();
     }
 
-    public function remember(array $data, bool $keepPreviousData = false)
+    public function remember(array $data = [], bool $keepPreviousData = false)
     {
         $notes = &$this->conversation->notes;
 

@@ -5,13 +5,12 @@ namespace Tii\LaravelTelegramBot\Telegram\Commands;
 
 
 use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Cache;
 use Longman\TelegramBot\Commands\Command;
 use Longman\TelegramBot\Commands\SystemCommand;
 use Longman\TelegramBot\Conversation;
 use Longman\TelegramBot\Entities\ServerResponse;
 use Longman\TelegramBot\Request;
-use Tii\LaravelTelegramBot\RemembersCallbackPayload;
+use Tii\LaravelTelegramBot\Telegram\InlineKeyboardButton\RemembersCallbackPayload;
 
 class CallbackqueryCommand extends SystemCommand
 {

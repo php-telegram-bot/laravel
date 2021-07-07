@@ -19,7 +19,7 @@ trait RemembersCallbackPayload
      */
     private CallbackPayload $payload;
 
-    protected function payload(): ?CallbackPayload
+    protected function payload(string $key = null, string $default = null): ?CallbackPayload
     {
         if (! isset($this->payload)) {
             $data = $this->getCallbackQuery()?->getData();
@@ -35,6 +35,10 @@ trait RemembersCallbackPayload
 
             $payload = Cache::get($cacheKey);
             $this->payload = new CallbackPayload($payload);
+        }
+
+        if (isset($key)) {
+            return $this->payload->get($key, $default);
         }
 
         return $this->payload;

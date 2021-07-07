@@ -19,7 +19,7 @@ trait LeadsConversation
      */
     private ConversationWrapper $conversation;
 
-    protected function conversation(): ?ConversationWrapper
+    protected function conversation(string $key = null, string $default = null): ?ConversationWrapper
     {
         if (! isset($this->conversation)) {
             if ($message = $this->getMessage()) {
@@ -41,6 +41,10 @@ trait LeadsConversation
                 chat_id: $chat->getId(),
                 command: $this->getName(),
             );
+        }
+
+        if (isset($key)) {
+            return $this->conversation->get($key, $default);
         }
 
         return $this->conversation;

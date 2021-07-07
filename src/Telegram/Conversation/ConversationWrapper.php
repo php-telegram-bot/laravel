@@ -1,6 +1,6 @@
 <?php
 
-namespace Tii\LaravelTelegramBot\Telegram;
+namespace Tii\LaravelTelegramBot\Telegram\Conversation;
 
 use Longman\TelegramBot\Conversation;
 

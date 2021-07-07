@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Tii\LaravelTelegramBot\Telegram;
+namespace Tii\LaravelTelegramBot\Telegram\InlineKeyboardButton;
 
 
 class CallbackPayload

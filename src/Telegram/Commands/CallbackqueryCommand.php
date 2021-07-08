@@ -29,7 +29,7 @@ class CallbackqueryCommand extends SystemCommand
             if (class_exists($class) && is_subclass_of($class, Command::class)) {
                 /** @var Command $command */
                 $command = new $class($this->telegram, $this->update);
-                return $command->execute();
+                return $command->preExecute();
             }
         }
 

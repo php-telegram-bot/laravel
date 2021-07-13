@@ -35,7 +35,7 @@ class CallbackqueryCommand extends SystemCommand
 
         // Check if conversation is active
         $user = $callbackQuery->getFrom() ?? null;
-        $chat = $callbackQuery->getMessage()->getChat() ?? null;
+        $chat = $callbackQuery->getMessage()?->getChat() ?? null;
         $conversation = new Conversation($user->getId(), $chat->getId());
         if ($conversation->exists() && $command = $conversation->getCommand()) {
             return $this->getTelegram()->executeCommand($command);

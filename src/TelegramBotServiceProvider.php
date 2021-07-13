@@ -144,7 +144,7 @@ class TelegramBotServiceProvider extends ServiceProvider
     {
         $admins = config('telegram.admins', '');
         if (! empty($admins)) {
-            $admins = explode(';', $admins);
+            $admins = explode(',', $admins);
             $bot->enableAdmins($admins);
         }
     }

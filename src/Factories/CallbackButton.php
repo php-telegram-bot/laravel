@@ -33,6 +33,11 @@ class CallbackButton
         return $this;
     }
 
+    public function new(): self
+    {
+        return clone $this;
+    }
+
     public function returnTo(string $className): self
     {
         $this->className = $className;

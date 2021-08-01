@@ -31,10 +31,10 @@ trait LeadsConversation
         if (! isset($this->conversation)) {
             $update = $this->getUpdate();
 
-            if ($message = $update->getMessage()) {
+            if ($message = $update?->getMessage()) {
                 $user = $message->getFrom();
                 $chat = $message->getChat();
-            } elseif ($callbackQuery = $update->getCallbackQuery()) {
+            } elseif ($callbackQuery = $update?->getCallbackQuery()) {
                 $user = $callbackQuery->getFrom();
                 $chat = $callbackQuery->getMessage()?->getChat();
             }

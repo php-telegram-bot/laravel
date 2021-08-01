@@ -14,14 +14,14 @@ trait UsesEffectiveEntities
 
     protected function getEffectiveUser(): ?User
     {
-        $update = $this->getUpdate();
-
-        if (! $update) {
+        if (! method_exists($this, 'getUpdate')) {
             return null;
         }
 
-        $data = $update->getRawData();
-        $type = $update->getUpdateType();
+        $update = $this->getUpdate();
+
+        $data = $update?->getRawData();
+        $type = $update?->getUpdateType();
 
         $user = $data[$type]['from']
             ?? $data['poll_answer']['user']
@@ -32,14 +32,14 @@ trait UsesEffectiveEntities
 
     protected function getEffectiveChat(): ?Chat
     {
-        $update = $this->getUpdate();
-
-        if (! $update) {
+        if (! method_exists($this, 'getUpdate')) {
             return null;
         }
 
-        $data = $update->getRawData();
-        $type = $update->getUpdateType();
+        $update = $this->getUpdate();
+
+        $data = $update?->getRawData();
+        $type = $update?->getUpdateType();
 
         $chat = $data[$type]['chat']
             ?? $data['callback_query']['message']['chat']
@@ -50,13 +50,13 @@ trait UsesEffectiveEntities
 
     protected function getEffectiveMessage(): ?Message
     {
-        $update = $this->getUpdate();
-
-        if (! $update) {
+        if (! method_exists($this, 'getUpdate')) {
             return null;
         }
 
-        $data = $update->getRawData();
+        $update = $this->getUpdate();
+
+        $data = $update?->getRawData();
         $message = $data['edited_channel_post']
             ?? $data['channel_post']
             ?? $data['callback_query']['message']

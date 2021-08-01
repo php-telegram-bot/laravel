@@ -29,7 +29,8 @@ trait RemembersCallbackPayload
     {
         if (! isset($this->payload)) {
             $update = $this->getUpdate();
-            $data = $update->getCallbackQuery()?->getData();
+            $data = $update?->getCallbackQuery()?->getData();
+
             if ($data === null) {
                 return null;
             }

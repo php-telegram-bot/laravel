@@ -4,6 +4,7 @@ namespace Tii\LaravelTelegramBot\Telegram;
 
 use Longman\TelegramBot\Entities\Chat;
 use Longman\TelegramBot\Entities\Message;
+use Longman\TelegramBot\Entities\Update;
 use Longman\TelegramBot\Entities\User;
 
 /**
@@ -19,6 +20,10 @@ trait UsesEffectiveEntities
         }
 
         $update = $this->getUpdate();
+
+        if (! $update instanceof Update) {
+            return null;
+        }
 
         $data = $update?->getRawData();
         $type = $update?->getUpdateType();
@@ -38,6 +43,10 @@ trait UsesEffectiveEntities
 
         $update = $this->getUpdate();
 
+        if (! $update instanceof Update) {
+            return null;
+        }
+
         $data = $update?->getRawData();
         $type = $update?->getUpdateType();
 
@@ -55,6 +64,10 @@ trait UsesEffectiveEntities
         }
 
         $update = $this->getUpdate();
+
+        if (! $update instanceof Update) {
+            return null;
+        }
 
         $data = $update?->getRawData();
         $message = $data['edited_channel_post']

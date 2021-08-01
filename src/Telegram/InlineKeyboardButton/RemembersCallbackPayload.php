@@ -5,11 +5,12 @@ namespace Tii\LaravelTelegramBot\Telegram\InlineKeyboardButton;
 
 use Illuminate\Support\Facades\Cache;
 use Longman\TelegramBot\Commands\Command;
+use Longman\TelegramBot\Entities\Update;
 
 /**
  * Trait CallbackQueryCache
  * @package Tii\LaravelTelegramBot\Services
- * @mixin Command
+ * @method Update getUpdate()
  */
 trait RemembersCallbackPayload
 {
@@ -27,7 +28,8 @@ trait RemembersCallbackPayload
     protected function payload(string $key = null, string $default = null)
     {
         if (! isset($this->payload)) {
-            $data = $this->getCallbackQuery()?->getData();
+            $update = $this->getUpdate();
+            $data = $update->getCallbackQuery()?->getData();
             if ($data === null) {
                 return null;
             }

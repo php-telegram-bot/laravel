@@ -25,8 +25,8 @@ trait UsesEffectiveEntities
             return null;
         }
 
-        $data = $update?->getRawData();
-        $type = $update?->getUpdateType();
+        $data = $update->getRawData();
+        $type = $update->getUpdateType();
 
         $user = $data[$type]['from']
             ?? $data['poll_answer']['user']
@@ -47,8 +47,8 @@ trait UsesEffectiveEntities
             return null;
         }
 
-        $data = $update?->getRawData();
-        $type = $update?->getUpdateType();
+        $data = $update->getRawData();
+        $type = $update->getUpdateType();
 
         $chat = $data[$type]['chat']
             ?? $data['callback_query']['message']['chat']
@@ -69,7 +69,7 @@ trait UsesEffectiveEntities
             return null;
         }
 
-        $data = $update?->getRawData();
+        $data = $update->getRawData();
         $message = $data['edited_channel_post']
             ?? $data['channel_post']
             ?? $data['callback_query']['message']

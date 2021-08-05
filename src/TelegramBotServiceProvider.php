@@ -10,6 +10,7 @@ use Longman\TelegramBot\Telegram;
 use Symfony\Component\Finder\Finder;
 use Tii\LaravelTelegramBot\Console\Commands\BotCloseCommand;
 use Tii\LaravelTelegramBot\Console\Commands\BotDeleteWebhookCommand;
+use Tii\LaravelTelegramBot\Console\Commands\BotFetchCommand;
 use Tii\LaravelTelegramBot\Console\Commands\BotLogoutCommand;
 use Tii\LaravelTelegramBot\Console\Commands\BotPublishCommand;
 use Tii\LaravelTelegramBot\Console\Commands\BotSetWebhookCommand;
@@ -107,6 +108,7 @@ class TelegramBotServiceProvider extends ServiceProvider
         $this->commands([
             BotCloseCommand::class,
             BotDeleteWebhookCommand::class,
+            BotFetchCommand::class,
             BotLogoutCommand::class,
             BotPublishCommand::class,
             BotSetWebhookCommand::class,

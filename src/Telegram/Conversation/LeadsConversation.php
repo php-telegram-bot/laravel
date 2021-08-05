@@ -4,11 +4,13 @@
 namespace Tii\LaravelTelegramBot\Telegram\Conversation;
 
 use Longman\TelegramBot\Commands\Command;
+use Longman\TelegramBot\Commands\UserCommand;
+use Longman\TelegramBot\Entities\Update;
 
 /**
  * Trait LeadsConversation
  * @package Tii\LaravelTelegramBot
- * @mixin Command
+ * @method Update getUpdate()
  */
 trait LeadsConversation
 {
@@ -20,31 +22,31 @@ trait LeadsConversation
     private ConversationWrapper $conversation;
 
     /**
-     * @param string|null $key
-     * @param string|null $default
+     * @param  string|null  $key
+     * @param  string|null  $default
      * @return ConversationWrapper|null|mixed
      */
     protected function conversation(string $key = null, string $default = null)
     {
         if (! isset($this->conversation)) {
-            if ($message = $this->getMessage()) {
+            $update = $this->getUpdate();
+
+            if ($message = $update?->getMessage()) {
                 $user = $message->getFrom();
                 $chat = $message->getChat();
-            } elseif ($callbackQuery = $this->getCallbackQuery()) {
+            } elseif ($callbackQuery = $update?->getCallbackQuery()) {
                 $user = $callbackQuery->getFrom();
                 $chat = $callbackQuery->getMessage()?->getChat();
-            } else {
-                return null;
             }
 
-            if (! $user || ! $chat) {
+            if (! isset($user) || ! isset($chat)) {
                 return null;
             }
 
             $this->conversation = new ConversationWrapper(
                 user_id: $user->getId(),
                 chat_id: $chat->getId(),
-                command: $this->getName(),
+                command: $this->getName()
             );
         }
 

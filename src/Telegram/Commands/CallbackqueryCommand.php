@@ -7,14 +7,16 @@ namespace Tii\LaravelTelegramBot\Telegram\Commands;
 use Illuminate\Support\Facades\App;
 use Longman\TelegramBot\Commands\Command;
 use Longman\TelegramBot\Commands\SystemCommand;
-use Longman\TelegramBot\Conversation;
 use Longman\TelegramBot\Entities\ServerResponse;
 use Longman\TelegramBot\Request;
+use Tii\LaravelTelegramBot\Facades\Bot;
+use Tii\LaravelTelegramBot\Telegram\Conversation\ConversationWrapper;
 use Tii\LaravelTelegramBot\Telegram\InlineKeyboardButton\RemembersCallbackPayload;
+use Tii\LaravelTelegramBot\Telegram\UsesEffectiveEntities;
 
 class CallbackqueryCommand extends SystemCommand
 {
-    use RemembersCallbackPayload;
+    use RemembersCallbackPayload, UsesEffectiveEntities;
 
     protected $name = 'callbackquery';
     protected $description = 'Handles CallbackQueries';
@@ -34,15 +36,27 @@ class CallbackqueryCommand extends SystemCommand
         }
 
         // Check if conversation is active
-        $user = $callbackQuery->getFrom() ?? null;
-        $chat = $callbackQuery->getMessage()?->getChat() ?? null;
-        $conversation = new Conversation($user->getId(), $chat->getId());
-        if ($conversation->exists() && $command = $conversation->getCommand()) {
-            return $this->getTelegram()->executeCommand($command);
+        $user = $this->getEffectiveUser();
+        $chat = $this->getEffectiveChat();
+
+        $conversation = new ConversationWrapper(
+            user_id: $user->getId(),
+            chat_id: $chat->getId()
+        );
+
+        if ($conversation->exists()) {
+            $return = Bot::callConversation($this->getUpdate(), $conversation);
+            if ($return instanceof ServerResponse) {
+                return $return;
+            }
+
+            if ($command = $conversation->getConversation()->getCommand()) {
+                return $this->getTelegram()->executeCommand($command);
+            }
         }
 
         // Check if own CallbackqueryCommand class is available
-        $class = App::getNamespace().'Telegram\\Commands\\CallbackqueryCommand';
+        $class = App::getNamespace() . 'Telegram\\Commands\\CallbackqueryCommand';
         if (class_exists($class) && is_subclass_of($class, SystemCommand::class)) {
             /** @var SystemCommand $command */
             $command = new $class($this->telegram, $this->update);

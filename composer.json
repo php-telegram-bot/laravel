@@ -35,7 +35,8 @@
               "Tii\\LaravelTelegramBot\\TelegramBotServiceProvider"
             ],
             "aliases": {
-                "CallbackButton": "Tii\\LaravelTelegramBot\\Facades\\CallbackButton"
+                "CallbackButton": "Tii\\LaravelTelegramBot\\Facades\\CallbackButton",
+                "Bot": "Tii\\LaravelTelegramBot\\Facades\\Bot"
             }
         }
     },

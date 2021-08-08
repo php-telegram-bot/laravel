@@ -58,8 +58,12 @@ class TelegramBotServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__ . '/../config/telegram.php', 'telegram');
         $this->mergeConfigFrom(__DIR__ . '/../config/expose.php', 'expose');
 
-        $this->app->bind('callback_button', function ($app) {
+        $this->app->bind(CallbackButton::class, function() {
             return new CallbackButton();
+        });
+
+        $this->app->singleton(LaravelTelegramBot::class, function() {
+            return new LaravelTelegramBot();
         });
 
         $this->app->singleton(Telegram::class, function () {
@@ -76,6 +80,7 @@ class TelegramBotServiceProvider extends ServiceProvider
             // Commands Discovery
             $this->discoverTelegramCommands($bot);
             $bot->addCommandClass(CallbackqueryCommand::class);
+            $bot->addCommandClass(GenericmessageCommand::class);
 
             // Set MySQL Connection
             $connection = app('db')->connection('mysql');

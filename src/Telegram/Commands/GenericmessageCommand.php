@@ -6,13 +6,16 @@ use Longman\TelegramBot\Commands\SystemCommand;
 use Longman\TelegramBot\Entities\ServerResponse;
 use Longman\TelegramBot\Request;
 use Tii\LaravelTelegramBot\Facades\Bot;
-use Tii\LaravelTelegramBot\Facades\CallbackButton;
 use Tii\LaravelTelegramBot\Telegram\Conversation\ConversationWrapper;
 use Tii\LaravelTelegramBot\Telegram\UsesEffectiveEntities;
 
 class GenericmessageCommand extends SystemCommand
 {
     use UsesEffectiveEntities;
+
+    protected $name = 'genericmessage';
+    protected $description = 'Handles Genericmessages';
+    protected $version = '1.0';
 
     public function execute(): ServerResponse
     {

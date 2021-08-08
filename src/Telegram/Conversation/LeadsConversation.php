@@ -3,8 +3,6 @@
 
 namespace Tii\LaravelTelegramBot\Telegram\Conversation;
 
-use Longman\TelegramBot\Commands\Command;
-use Longman\TelegramBot\Commands\UserCommand;
 use Longman\TelegramBot\Entities\Update;
 
 /**
@@ -16,15 +14,14 @@ trait LeadsConversation
 {
 
     /**
-     * @var ConversationWrapper
      * @internal
      */
-    private ConversationWrapper $conversation;
+    protected ?ConversationWrapper $conversation;
 
     /**
      * @param  string|null  $key
      * @param  string|null  $default
-     * @return ConversationWrapper|null|mixed
+     * @return ?ConversationWrapper|mixed
      */
     protected function conversation(string $key = null, string $default = null)
     {

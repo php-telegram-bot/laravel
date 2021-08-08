@@ -25,6 +25,8 @@ class LaravelTelegramBot
                 return $return;
             }
         }
+
+        return null;
     }
 
 }

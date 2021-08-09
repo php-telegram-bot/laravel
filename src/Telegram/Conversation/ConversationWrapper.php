@@ -56,7 +56,7 @@ class ConversationWrapper
         return $this->conversation;
     }
 
-    public function persist(array $data)
+    public function persist(array $data): self
     {
         $notes = &$this->conversation->notes;
         foreach ($data as $key => $value) {
@@ -64,9 +64,11 @@ class ConversationWrapper
             $notes['persist'][] = $key;
         }
         $this->conversation->update();
+
+        return $this;
     }
 
-    public function remember(array $data = [], bool $keepPreviousData = false)
+    public function remember(array $data = [], bool $keepPreviousData = false): self
     {
         $notes = &$this->conversation->notes;
 
@@ -86,6 +88,7 @@ class ConversationWrapper
 
         $notes['persist'] = array_values($notes['persist']);
         $this->conversation->update();
+        return $this;
     }
 
     public function exists(): bool

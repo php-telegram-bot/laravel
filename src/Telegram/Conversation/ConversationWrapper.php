@@ -96,6 +96,11 @@ class ConversationWrapper
         return $this->conversation->exists();
     }
 
+    public function update(): void
+    {
+        $this->conversation->update();
+    }
+
     public function end(): void
     {
         $this->conversation->stop();

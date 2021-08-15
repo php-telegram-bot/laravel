@@ -9,6 +9,7 @@ use Longman\TelegramBot\Entities\Update;
  * Trait LeadsConversation
  * @package Tii\LaravelTelegramBot
  * @method Update getUpdate()
+ * @method string getName()
  */
 trait LeadsConversation
 {
@@ -26,25 +27,7 @@ trait LeadsConversation
     protected function conversation(string $key = null, string $default = null)
     {
         if (! isset($this->conversation)) {
-            $update = $this->getUpdate();
-
-            if ($message = $update?->getMessage()) {
-                $user = $message->getFrom();
-                $chat = $message->getChat();
-            } elseif ($callbackQuery = $update?->getCallbackQuery()) {
-                $user = $callbackQuery->getFrom();
-                $chat = $callbackQuery->getMessage()?->getChat();
-            }
-
-            if (! isset($user) || ! isset($chat)) {
-                return null;
-            }
-
-            $this->conversation = new ConversationWrapper(
-                user_id: $user->getId(),
-                chat_id: $chat->getId(),
-                command: $this->getName()
-            );
+            $this->conversation = new ConversationWrapper($this->getUpdate(), $this->getName());
         }
 
         if (isset($key)) {

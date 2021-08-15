@@ -4,25 +4,27 @@ namespace Tii\LaravelTelegramBot;
 
 use Longman\TelegramBot\Entities\ServerResponse;
 use Longman\TelegramBot\Entities\Update;
-use Tii\LaravelTelegramBot\Telegram\Conversation\ConversationWrapper;
+use Longman\TelegramBot\Request;
 
 class LaravelTelegramBot
 {
 
-    protected array $conversation = [];
+    protected array $callbacks = [];
 
-    public function conversation(callable $closure)
+    public function register(callable $callback)
     {
-        $this->conversation[] = $closure;
+        $this->callbacks[] = $callback;
     }
 
-    public function callConversation(Update $update, ConversationWrapper $conversation): ?ServerResponse
+    public function call(Update $update): ?ServerResponse
     {
-        foreach ($this->conversation as $callback) {
-            $return = $callback($update, $conversation);
+        foreach ($this->callbacks as $callback) {
+            $return = $callback($update);
 
             if ($return instanceof ServerResponse) {
                 return $return;
+            } elseif ($return === true) {
+                return Request::emptyResponse();
             }
         }
 

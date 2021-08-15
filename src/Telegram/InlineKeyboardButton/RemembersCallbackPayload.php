@@ -35,6 +35,7 @@ trait RemembersCallbackPayload
                 return null;
             }
 
+            // TODO: Move CacheKey and initialization in CallbackPayload::__construct()
             $cacheKey = 'CallbackQuery:'.$data;
 
             if (! Cache::has($cacheKey)) {

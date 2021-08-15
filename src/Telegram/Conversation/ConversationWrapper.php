@@ -3,6 +3,7 @@
 namespace Tii\LaravelTelegramBot\Telegram\Conversation;
 
 use Longman\TelegramBot\Conversation;
+use Longman\TelegramBot\Entities\Update;
 
 class ConversationWrapper
 {
@@ -10,11 +11,25 @@ class ConversationWrapper
     protected Conversation $conversation;
     protected array $temporary = [];
 
-    public function __construct($user_id, $chat_id, $command = '')
+    public function __construct(Update $update, $command = '')
     {
+        if ($message = $update->getMessage() ?? $update->getEditedMessage()) {
+            $user = $message->getFrom();
+            $chat = $message->getChat();
+        } elseif ($callbackQuery = $update->getCallbackQuery()) {
+            $user = $callbackQuery->getFrom();
+            $chat = $callbackQuery->getMessage()?->getChat();
+        }
+
+        // TODO: Use getEffective*() Methods that should be created in \Bot Facade
+
+        if (! isset($user) || ! isset($chat)) {
+            throw new \InvalidArgumentException('Could not determine user or chat for ConversationWrapper');
+        }
+
         $this->conversation = new Conversation(
-            user_id: $user_id,
-            chat_id: $chat_id,
+            user_id: $user->getId(),
+            chat_id: $chat->getId(),
             command: $command
         );
 

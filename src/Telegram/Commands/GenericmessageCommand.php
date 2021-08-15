@@ -3,6 +3,7 @@
 namespace Tii\LaravelTelegramBot\Telegram\Commands;
 
 use Longman\TelegramBot\Commands\SystemCommand;
+use Longman\TelegramBot\Conversation;
 use Longman\TelegramBot\Entities\ServerResponse;
 use Longman\TelegramBot\Request;
 use Tii\LaravelTelegramBot\Facades\Bot;
@@ -19,24 +20,22 @@ class GenericmessageCommand extends SystemCommand
 
     public function execute(): ServerResponse
     {
+        $return = Bot::call($this->getUpdate());
+        if ($return instanceof ServerResponse) {
+            return $return;
+        }
+
         $user = $this->getEffectiveUser();
         $chat = $this->getEffectiveChat();
 
         // Check Conversation
-        $conversation = new ConversationWrapper(
+        $conversation = new Conversation(
             user_id: $user->getId(),
             chat_id: $chat->getId()
         );
 
-        if ($conversation->exists()) {
-            $return = Bot::callConversation($this->getUpdate(), $conversation);
-            if ($return instanceof ServerResponse) {
-                return $return;
-            }
-
-            if ($command = $conversation->getConversation()->getCommand()) {
-                return $this->getTelegram()->executeCommand($command);
-            }
+        if ($conversation->exists() && ($command = $conversation->getCommand())) {
+            return $this->getTelegram()->executeCommand($command);
         }
 
         return Request::emptyResponse();

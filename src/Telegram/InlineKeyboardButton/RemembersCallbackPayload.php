@@ -18,7 +18,7 @@ trait RemembersCallbackPayload
      * @var CallbackPayload
      * @internal
      */
-    private CallbackPayload $payload;
+    protected ?CallbackPayload $payload;
 
     /**
      * @param string|null $key

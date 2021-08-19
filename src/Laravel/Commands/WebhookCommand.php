@@ -98,6 +98,7 @@ class WebhookCommand extends Command
             if (! $request->isOk()) {
                 throw new TelegramException($request->getDescription());
             }
+            $this->info('Current webhook info:');
             $this->info(json_encode($request->getResult(), JSON_PRETTY_PRINT));
         } catch (TelegramException $e) {
             $this->error("Couldn't get webhook info");

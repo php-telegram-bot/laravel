@@ -1,4 +1,4 @@
-# Telegram Bot Package for Laravel 6.x
+# Telegram Bot Package for Laravel 6.x, 7.x, and 8.x
 
 [![Build Status](https://travis-ci.org/php-telegram-bot/laravel.svg?branch=master)](https://travis-ci.org/php-telegram-bot/laravel)
 [![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/php-telegram-bot/laravel/master.svg?style=flat-square)](https://scrutinizer-ci.com/g/php-telegram-bot/laravel/?b=master)

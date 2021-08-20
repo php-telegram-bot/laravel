@@ -6,7 +6,7 @@
 [![Latest Stable Version](https://img.shields.io/packagist/v/php-telegram-bot/laravel.svg)](https://packagist.org/packages/php-telegram-bot/laravel)
 [![Total Downloads](https://img.shields.io/packagist/dt/php-telegram-bot/laravel.svg)](https://packagist.org/packages/php-telegram-bot/laravel)
 [![Downloads Month](https://img.shields.io/packagist/dm/php-telegram-bot/laravel.svg)](https://packagist.org/packages/php-telegram-bot/laravel)
-[![Minimum PHP Version](http://img.shields.io/badge/php-%3E%3D5.5.9-8892BF.svg)](https://php.net/)
+[![Minimum PHP Version](http://img.shields.io/badge/php-%3E%3D7.3-8892BF.svg)](https://php.net/)
 [![License](https://img.shields.io/packagist/l/php-telegram-bot/laravel.svg)](https://github.com/php-telegram-bot/laravel/LICENSE.md)
 
 This package helps easily integrate [PHP Telegram Bot](https://github.com/php-telegram-bot/core) library in Laravel application.

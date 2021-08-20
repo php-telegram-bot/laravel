@@ -18,6 +18,10 @@ use Longman\TelegramBot\Exception\TelegramException;
 use Longman\TelegramBot\Request;
 use PhpTelegramBot\Laravel\PhpTelegramBotContract;
 
+use function json_encode;
+
+use const JSON_PRETTY_PRINT;
+
 class WebhookCommand extends Command
 {
     protected $signature = 'telegram:webhook {webhook?}

@@ -13,9 +13,10 @@ declare(strict_types=1);
 
 namespace PhpTelegramBot\Laravel;
 
+use Illuminate\Database\Migrations\Migration as LaravelMigration;
 use Illuminate\Support\Facades\DB;
 
-class Migration extends \Illuminate\Database\Migrations\Migration
+class Migration extends LaravelMigration
 {
     /** @var string */
     protected $prefix = '';
@@ -28,15 +29,15 @@ class Migration extends \Illuminate\Database\Migrations\Migration
     /**
      * Change column type for passed table field(s).
      *
-     * @param array  $table_columns
-     * @param string $new_type
+     * @param array  $tableColumns
+     * @param string $newType
      */
-    public function changeColumnTypes(array $table_columns, string $new_type): void
+    public function changeColumnTypes(array $tableColumns, string $newType): void
     {
         $database = DB::connection()->getDatabaseName();
         $prefix   = DB::connection()->getTablePrefix() . $this->prefix;
 
-        foreach ($table_columns as $table => $columns) {
+        foreach ($tableColumns as $table => $columns) {
             foreach ($columns as $column) {
                 // Preserve column comment and nullable state.
                 $props = DB::selectOne('
@@ -50,7 +51,7 @@ class Migration extends \Illuminate\Database\Migrations\Migration
 
                 $comment  = $props->COLUMN_COMMENT;
                 $nullable = $props->IS_NULLABLE === 'YES' ? 'NULL' : 'NOT NULL';
-                DB::statement("ALTER TABLE `{$prefix}{$table}` CHANGE `{$column}` `{$column}` {$new_type} {$nullable} COMMENT '{$comment}'");
+                DB::statement("ALTER TABLE `{$prefix}{$table}` CHANGE `{$column}` `{$column}` {$newType} {$nullable} COMMENT '{$comment}'");
             }
         }
     }

@@ -6,7 +6,6 @@ namespace Tests\Unit;
 
 class WebhookCommandTest extends AbstractTestCase
 {
-
     /**
     * @test
     */

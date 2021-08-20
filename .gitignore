@@ -16,6 +16,7 @@ composer.lock
 
 # Test Related Files #
 /phpunit.xml
+/.phpunit.result.cache
 
 # Composer
 vendor/

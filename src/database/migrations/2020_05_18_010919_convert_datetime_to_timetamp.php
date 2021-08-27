@@ -7,7 +7,7 @@ use PhpTelegramBot\Laravel\Migration;
 class ConvertDatetimeToTimetamp extends Migration
 {
     /** @var array[] Fields that require DATETIME to TIMESTAMP conversion. */
-    private $table_columns = [
+    private $tableColumns = [
         'callback_query'       => ['created_at'],
         'chosen_inline_result' => ['created_at'],
         'edited_message'       => ['edit_date'],
@@ -18,11 +18,11 @@ class ConvertDatetimeToTimetamp extends Migration
 
     public function up(): void
     {
-        $this->changeColumnTypes($this->table_columns, 'TIMESTAMP NULL DEFAULT NULL');
+        $this->changeColumnTypes($this->tableColumns, 'TIMESTAMP NULL DEFAULT NULL');
     }
 
     public function down(): void
     {
-        $this->changeColumnTypes($this->table_columns, 'DATETIME NULL DEFAULT NULL');
+        $this->changeColumnTypes($this->tableColumns, 'DATETIME NULL DEFAULT NULL');
     }
 }

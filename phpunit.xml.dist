@@ -25,6 +25,8 @@
         <env name="CACHE_DRIVER" value="array"/>
         <env name="SESSION_DRIVER" value="array"/>
         <env name="QUEUE_DRIVER" value="sync"/>
+        <env name="PHP_TELEGRAM_BOT_API_KEY" value="123:testing"/>
+        <const name="PHPUNIT_TESTSUITE" value="true" />
     </php>
     <testsuites>
         <testsuite name="Package Test Suite">

@@ -18,6 +18,10 @@ use Longman\TelegramBot\Exception\TelegramException;
 use Longman\TelegramBot\Request;
 use PhpTelegramBot\Laravel\PhpTelegramBotContract;
 
+use function json_encode;
+
+use const JSON_PRETTY_PRINT;
+
 class WebhookCommand extends Command
 {
     protected $signature = 'telegram:webhook {webhook?}
@@ -98,6 +102,7 @@ class WebhookCommand extends Command
             if (! $request->isOk()) {
                 throw new TelegramException($request->getDescription());
             }
+            $this->info('Current webhook info:');
             $this->info(json_encode($request->getResult(), JSON_PRETTY_PRINT));
         } catch (TelegramException $e) {
             $this->error("Couldn't get webhook info");

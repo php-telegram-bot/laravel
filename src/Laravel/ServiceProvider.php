@@ -40,7 +40,7 @@ class ServiceProvider extends LaravelServiceProvider
         // Append the default settings
         $this->mergeConfigFrom(
             __DIR__ . '/../config/config.php',
-            'phptelegrambot'
+            'phptelegrambot',
         );
 
         $this->publishes([
@@ -67,8 +67,8 @@ class ServiceProvider extends LaravelServiceProvider
 
             // Set command related configs
             if (! empty($config['commands']['configs'])) {
-                foreach ($config['commands']['configs'] as $command_name => $command_config) {
-                    $bot->setCommandConfig($command_name, $command_config);
+                foreach ($config['commands']['configs'] as $commandName => $commandConfig) {
+                    $bot->setCommandConfig($commandName, $commandConfig);
                 }
             }
 

@@ -29,8 +29,7 @@
         "longman/telegram-bot": "^0.74"
     },
     "require-dev": {
-        "mockery/mockery": "~1.2",
-        "phpunit/phpunit": "~9.3",
+        "phpunit/phpunit": "^9.3",
         "longman/php-code-style": "^7.0",
         "graham-campbell/testbench": "^5.6"
     },

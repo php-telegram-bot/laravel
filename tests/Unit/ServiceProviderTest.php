@@ -12,27 +12,15 @@ class ServiceProviderTest extends AbstractTestCase
 {
     use ServiceProviderTrait;
 
-    /**
-     * @test
-     */
+    /** @test */
     public function config_is_injectable()
     {
         $this->assertIsInjectable(Repository::class);
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function database_is_injectable()
     {
         $this->assertIsInjectable(Database::class);
-    }
-
-    /**
-     * @test
-     */
-    public function provides()
-    {
-        $this->testProvides();
     }
 }

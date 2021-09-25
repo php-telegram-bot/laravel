@@ -9,12 +9,7 @@ use PhpTelegramBot\Laravel\ServiceProvider;
 
 abstract class AbstractTestCase extends AbstractPackageTestCase
 {
-    /**
-     * Get the service provider class.
-     *
-     * @return string
-     */
-    protected function getServiceProviderClass()
+    protected function getServiceProviderClass(): string
     {
         return ServiceProvider::class;
     }

@@ -19,11 +19,6 @@ class UpdateSchema0620To0630 extends Migration
                 $table->timestamp('close_date')->nullable()->comment('Point in time (Unix timestamp) when the poll will be automatically closed')->after('open_period');
             });
 
-            Schema::table($this->prefix . 'poll_answer', static function (Blueprint $table) {
-                $table->dropPrimary();
-                $table->primary(['poll_id', 'user_id']);
-            });
-
             Schema::table($this->prefix . 'message', function (Blueprint $table) {
                 $table->dropForeign('message_ibfk_6');
                 $table->dropIndex('message_ibfk_6');

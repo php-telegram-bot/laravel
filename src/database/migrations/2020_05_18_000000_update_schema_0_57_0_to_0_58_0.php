@@ -12,7 +12,11 @@ class UpdateSchema0570To0580 extends Migration
     public function up(): void
     {
         try {
+            Schema::table($this->prefix . 'botan_shortener', function (Blueprint $table) {
+                $table->dropForeign('botan_shortener_ibfk_1');
+            });
             Schema::dropIfExists($this->prefix . 'botan_shortener');
+
             Schema::table($this->prefix . 'message', static function (Blueprint $table) {
                 $table->text('reply_markup')->nullable()->comment('Inline keyboard attached to the message')->after('passport_data');
             });
@@ -25,7 +29,7 @@ class UpdateSchema0570To0580 extends Migration
     public function down(): void
     {
         try {
-            Schema::create('botan_shortener', function (Blueprint $table) {
+            Schema::create($this->prefix . 'botan_shortener', function (Blueprint $table) {
                 $table->bigInteger('id', true)->unsigned()->comment('Unique identifier for this entry');
                 $table->bigInteger('user_id')->nullable()->index('user_id')->comment('Unique user identifier');
                 $table->text('url')->comment('Original URL');

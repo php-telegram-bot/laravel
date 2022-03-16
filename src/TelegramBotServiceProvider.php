@@ -66,31 +66,34 @@ class TelegramBotServiceProvider extends ServiceProvider
             return new LaravelTelegramBot();
         });
 
-        $this->app->singleton(Telegram::class, function () {
-            $token = config('telegram.bot.api_token');
-            $username = config('telegram.bot.username');
+        $this->configureTelegramBot();
+    }
 
-            $apiUrl = config('telegram.bot.api_url', '');
-            if (! empty($apiUrl)) {
-                Request::setCustomBotApiUri($apiUrl);
-            }
+    protected function configureTelegramBot()
+    {
+        $token = config('telegram.bot.api_token');
+        $username = config('telegram.bot.username');
 
-            $bot = new Telegram($token, $username);
+        $apiUrl = config('telegram.bot.api_url', '');
+        if (! empty($apiUrl)) {
+            Request::setCustomBotApiUri($apiUrl);
+        }
 
-            // Commands Discovery
-            $this->discoverTelegramCommands($bot);
-            $bot->addCommandClass(CallbackqueryCommand::class);
-            $bot->addCommandClass(GenericmessageCommand::class);
+        $bot = new Telegram($token, $username);
 
-            // Set MySQL Connection
-            $connection = app('db')->connection('mysql');
-            $bot->enableExternalMySql($connection->getPdo(), 'bot_');
+        // Commands Discovery
+        $this->discoverTelegramCommands($bot);
+        $bot->addCommandClass(CallbackqueryCommand::class);
+        $bot->addCommandClass(GenericmessageCommand::class);
 
-            // Register admins
-            $this->registerTelegramAdmins($bot);
+        // Set MySQL Connection
+        $connection = app('db')->connection('mysql');
+        $bot->enableExternalMySql($connection->getPdo(), 'bot_');
 
-            return $bot;
-        });
+        // Register admins
+        $this->registerTelegramAdmins($bot);
+
+        $this->app->instance(Telegram::class, $bot);
     }
 
     /**

@@ -2,9 +2,10 @@
 
 namespace Tii\LaravelTelegramBot;
 
+use App\Telegram\Commands\Command;
 use Illuminate\Routing\Router;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\ServiceProvider;
-use Longman\TelegramBot\Commands\Command;
 use Longman\TelegramBot\Request;
 use Longman\TelegramBot\Telegram;
 use Symfony\Component\Finder\Finder;
@@ -72,6 +73,11 @@ class TelegramBotServiceProvider extends ServiceProvider
     protected function configureTelegramBot()
     {
         $token = config('telegram.bot.api_token');
+
+        if (! $token) {
+            return;
+        }
+
         $username = config('telegram.bot.username');
 
         $apiUrl = config('telegram.bot.api_url', '');
@@ -133,6 +139,8 @@ class TelegramBotServiceProvider extends ServiceProvider
     {
         $namespace = $this->app->getNamespace();
         $commandsPath = app_path('Telegram/Commands');
+        File::ensureDirectoryExists($commandsPath);
+
         foreach ((new Finder)->in($commandsPath)->files() as $command) {
             $command = $namespace . str_replace(
                     ['/', '.php'],

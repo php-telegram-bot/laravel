@@ -2,10 +2,10 @@
 
 namespace Tii\LaravelTelegramBot;
 
-use App\Telegram\Commands\Command;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\ServiceProvider;
+use Longman\TelegramBot\Commands\Command;
 use Longman\TelegramBot\Request;
 use Longman\TelegramBot\Telegram;
 use Symfony\Component\Finder\Finder;
@@ -15,7 +15,6 @@ use Tii\LaravelTelegramBot\Console\Commands\BotFetchCommand;
 use Tii\LaravelTelegramBot\Console\Commands\BotLogoutCommand;
 use Tii\LaravelTelegramBot\Console\Commands\BotPublishCommand;
 use Tii\LaravelTelegramBot\Console\Commands\BotSetWebhookCommand;
-use Tii\LaravelTelegramBot\Console\Commands\BotTransferCommand;
 use Tii\LaravelTelegramBot\Console\Commands\BotTunnelCommand;
 use Tii\LaravelTelegramBot\Console\Commands\MakeTelegramCommand;
 use Tii\LaravelTelegramBot\Factories\CallbackButton;

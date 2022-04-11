@@ -6,9 +6,9 @@ use Illuminate\Console\Command;
 use Longman\TelegramBot\Request;
 use Longman\TelegramBot\Telegram;
 
-class BotDeleteWebhookCommand extends Command
+class TelegramDeleteWebhookCommand extends Command
 {
-    protected $signature = 'bot:delete-webhook
+    protected $signature = 'telegram:delete-webhook
                             {--d|drop-pending-updates : Pass to drop all pending updates}';
 
     protected $description = 'Use this method to remove webhook integration if you decide to switch back to getUpdates';

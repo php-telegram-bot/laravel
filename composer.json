@@ -32,11 +32,11 @@
     "extra": {
         "laravel": {
             "providers": [
-              "Tii\\LaravelTelegramBot\\TelegramBotServiceProvider"
+              "Tii\\LaravelTelegramBot\\TelegramServiceProvider"
             ],
             "aliases": {
                 "CallbackButton": "Tii\\LaravelTelegramBot\\Facades\\CallbackButton",
-                "Bot": "Tii\\LaravelTelegramBot\\Facades\\Bot"
+                "Telegram": "Tii\\LaravelTelegramBot\\Facades\\Telegram"
             }
         }
     },

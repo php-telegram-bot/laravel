@@ -6,9 +6,9 @@ use Illuminate\Console\Command;
 use Longman\TelegramBot\Request;
 use Longman\TelegramBot\Telegram;
 
-class BotCloseCommand extends Command
+class TelegramCloseCommand extends Command
 {
-    protected $signature = 'bot:close';
+    protected $signature = 'telegram:close';
 
     protected $description = 'Sends a close to the currently registered Telegram Server';
 

@@ -9,20 +9,20 @@ use Longman\TelegramBot\Commands\Command;
 use Longman\TelegramBot\Request;
 use Longman\TelegramBot\Telegram;
 use Symfony\Component\Finder\Finder;
-use Tii\LaravelTelegramBot\Console\Commands\BotCloseCommand;
-use Tii\LaravelTelegramBot\Console\Commands\BotDeleteWebhookCommand;
-use Tii\LaravelTelegramBot\Console\Commands\BotFetchCommand;
-use Tii\LaravelTelegramBot\Console\Commands\BotLogoutCommand;
-use Tii\LaravelTelegramBot\Console\Commands\BotPublishCommand;
-use Tii\LaravelTelegramBot\Console\Commands\BotSetWebhookCommand;
-use Tii\LaravelTelegramBot\Console\Commands\BotTunnelCommand;
+use Tii\LaravelTelegramBot\Console\Commands\TelegramCloseCommand;
+use Tii\LaravelTelegramBot\Console\Commands\TelegramDeleteWebhookCommand;
+use Tii\LaravelTelegramBot\Console\Commands\TelegramFetchCommand;
+use Tii\LaravelTelegramBot\Console\Commands\TelegramLogoutCommand;
+use Tii\LaravelTelegramBot\Console\Commands\TelegramPublishCommand;
+use Tii\LaravelTelegramBot\Console\Commands\TelegramSetWebhookCommand;
+use Tii\LaravelTelegramBot\Console\Commands\TelegramTunnelCommand;
 use Tii\LaravelTelegramBot\Console\Commands\MakeTelegramCommand;
 use Tii\LaravelTelegramBot\Factories\CallbackButton;
 use Tii\LaravelTelegramBot\Http\Middleware\TrustTelegramNetwork;
 use Tii\LaravelTelegramBot\Telegram\Commands\CallbackqueryCommand;
 use Tii\LaravelTelegramBot\Telegram\Commands\GenericmessageCommand;
 
-class TelegramBotServiceProvider extends ServiceProvider
+class TelegramServiceProvider extends ServiceProvider
 {
     /**
      * Perform post-registration booting of services.
@@ -57,14 +57,6 @@ class TelegramBotServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(__DIR__ . '/../config/telegram.php', 'telegram');
         $this->mergeConfigFrom(__DIR__ . '/../config/expose.php', 'expose');
-
-        $this->app->bind(CallbackButton::class, function() {
-            return new CallbackButton();
-        });
-
-        $this->app->singleton(LaravelTelegramBot::class, function() {
-            return new LaravelTelegramBot();
-        });
 
         $this->configureTelegramBot();
     }
@@ -119,14 +111,14 @@ class TelegramBotServiceProvider extends ServiceProvider
 
         // Registering package commands.
         $this->commands([
-            BotCloseCommand::class,
-            BotDeleteWebhookCommand::class,
-            BotFetchCommand::class,
-            BotLogoutCommand::class,
-            BotPublishCommand::class,
-            BotSetWebhookCommand::class,
-            BotTunnelCommand::class,
             MakeTelegramCommand::class,
+            TelegramCloseCommand::class,
+            TelegramDeleteWebhookCommand::class,
+            TelegramFetchCommand::class,
+            TelegramLogoutCommand::class,
+            TelegramPublishCommand::class,
+            TelegramSetWebhookCommand::class,
+            TelegramTunnelCommand::class,
         ]);
     }
 

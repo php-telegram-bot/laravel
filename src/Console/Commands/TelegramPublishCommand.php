@@ -4,9 +4,9 @@ namespace Tii\LaravelTelegramBot\Console\Commands;
 
 use Illuminate\Filesystem\Filesystem;
 
-class BotPublishCommand extends GeneratorCommand
+class TelegramPublishCommand extends GeneratorCommand
 {
-    protected $signature = 'bot:publish';
+    protected $signature = 'telegram:publish';
 
     protected $description = 'Publishes folder structure for Telegram Commands';
 

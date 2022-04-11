@@ -6,9 +6,9 @@ use Illuminate\Console\Command;
 use Longman\TelegramBot\Request;
 use Longman\TelegramBot\Telegram;
 
-class BotLogoutCommand extends Command
+class TelegramLogoutCommand extends Command
 {
-    protected $signature = 'bot:logout';
+    protected $signature = 'telegram:logout';
 
     protected $description = 'Sends a logout to the currently registered Telegram Server';
 

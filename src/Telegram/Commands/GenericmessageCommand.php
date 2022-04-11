@@ -6,7 +6,7 @@ use Longman\TelegramBot\Commands\SystemCommand;
 use Longman\TelegramBot\Conversation;
 use Longman\TelegramBot\Entities\ServerResponse;
 use Longman\TelegramBot\Request;
-use Tii\LaravelTelegramBot\Facades\Bot;
+use Tii\LaravelTelegramBot\Facades\Telegram;
 use Tii\LaravelTelegramBot\Telegram\Conversation\ConversationWrapper;
 use Tii\LaravelTelegramBot\Telegram\UsesEffectiveEntities;
 
@@ -20,7 +20,7 @@ class GenericmessageCommand extends SystemCommand
 
     public function execute(): ServerResponse
     {
-        $return = Bot::call($this->getUpdate());
+        $return = Telegram::call($this->getUpdate());
         if ($return instanceof ServerResponse) {
             return $return;
         }

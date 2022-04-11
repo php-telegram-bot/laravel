@@ -10,9 +10,9 @@ use Longman\TelegramBot\Telegram;
 use Symfony\Component\Console\Command\SignalableCommandInterface;
 use Symfony\Component\Process\Process;
 
-class BotTunnelCommand extends Command implements SignalableCommandInterface
+class TelegramTunnelCommand extends Command implements SignalableCommandInterface
 {
-    protected $signature = 'bot:tunnel';
+    protected $signature = 'telegram:tunnel';
 
     protected $description = 'Creates a tunnel for local development.';
 

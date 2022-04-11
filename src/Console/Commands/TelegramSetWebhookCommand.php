@@ -6,9 +6,9 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Str;
 use Longman\TelegramBot\Telegram;
 
-class BotSetWebhookCommand extends Command
+class TelegramSetWebhookCommand extends Command
 {
-    protected $signature = 'bot:set-webhook
+    protected $signature = 'telegram:set-webhook
                             {hostname? : Hostname to set}
                             {--d|drop-pending-updates : Pass to drop all pending updates}';
 

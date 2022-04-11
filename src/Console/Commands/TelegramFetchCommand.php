@@ -9,10 +9,10 @@ use Longman\TelegramBot\Exception\TelegramException;
 use Longman\TelegramBot\Telegram;
 use Symfony\Component\Console\Command\SignalableCommandInterface;
 
-class BotFetchCommand extends Command implements SignalableCommandInterface
+class TelegramFetchCommand extends Command implements SignalableCommandInterface
 {
 
-    protected $signature = 'bot:fetch';
+    protected $signature = 'telegram:fetch';
 
     protected $description = 'Fetches Telegram updates periodically';
 

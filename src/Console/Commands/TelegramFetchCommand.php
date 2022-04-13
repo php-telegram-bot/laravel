@@ -20,7 +20,7 @@ class TelegramFetchCommand extends Command implements SignalableCommandInterface
 
     public function handle(Telegram $bot)
     {
-        $this->callSilent('bot:delete-webhook');
+        $this->callSilent('telegram:delete-webhook');
 
         $options = [
             'timeout' => 5

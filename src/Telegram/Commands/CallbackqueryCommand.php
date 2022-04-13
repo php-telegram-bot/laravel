@@ -31,7 +31,7 @@ class CallbackqueryCommand extends SystemCommand
         }
 
         // Check if we have data for that hash in the Cache
-        if ($class = $this->payload()->get('__class')) {
+        if ($class = $this->payload()?->get('__class')) {
             if (class_exists($class) && is_subclass_of($class, Command::class)) {
                 /** @var Command $command */
                 $command = new $class($this->telegram, $this->update);

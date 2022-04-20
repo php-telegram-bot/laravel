@@ -11,8 +11,9 @@ class TelegramSetWebhookCommand extends Command
 {
     protected $signature = 'telegram:set-webhook
                             {hostname? : Hostname to set}
-                            {--d|drop-pending-updates : Pass to drop all pending updates}
-                            {--a|all-update-types : Passes all possible update types to allowed_updates}';
+                            {--d|drop-pending-updates : Drop all pending updates}
+                            {--a|all-update-types : Explicitly allow all updates (including "chat_member")}
+                            {--allowed-updates= : Define allowed updates (comma-seperated)}';
 
     protected $description = 'Use this method to specify a url and receive incoming updates via an outgoing webhook';
 
@@ -42,6 +43,8 @@ class TelegramSetWebhookCommand extends Command
 
         if ($this->option('all-update-types')) {
             $options['allowed_updates'] = Update::getUpdateTypes();
+        } elseif ($allowedUpdates = $this->option('allowed-updates')) {
+            $options['allowed_updates'] = str($allowedUpdates)->explode(',');
         }
 
         $response = $bot->setWebhook($url, $options);

@@ -7,74 +7,38 @@ use Longman\TelegramBot\Entities\Message;
 use Longman\TelegramBot\Entities\Update;
 use Longman\TelegramBot\Entities\User;
 
-/**
- * @method getUpdate(): Update
- */
 trait UsesEffectiveEntities
 {
 
-    protected function getEffectiveUser(): ?User
+    protected function getEffectiveUser(Update $update): ?User
     {
-        if (! method_exists($this, 'getUpdate')) {
-            return null;
-        }
-
-        $update = $this->getUpdate();
-
-        if (! $update instanceof Update) {
-            return null;
-        }
-
-        $data = $update->getRawData();
         $type = $update->getUpdateType();
 
-        $user = $data[$type]['from']
-            ?? $data['poll_answer']['user']
+        $user = $update->$type['from']
+            ?? $update->poll_answer['user']
             ?? null;
 
         return $user ? new User($user) : null;
     }
 
-    protected function getEffectiveChat(): ?Chat
+    protected function getEffectiveChat(Update $update): ?Chat
     {
-        if (! method_exists($this, 'getUpdate')) {
-            return null;
-        }
-
-        $update = $this->getUpdate();
-
-        if (! $update instanceof Update) {
-            return null;
-        }
-
-        $data = $update->getRawData();
         $type = $update->getUpdateType();
 
-        $chat = $data[$type]['chat']
-            ?? $data['callback_query']['message']['chat']
+        $chat = $update->$type['chat']
+            ?? $update->callback_query['message']['chat']
             ?? null;
 
         return $chat ? new Chat($chat) : null;
     }
 
-    protected function getEffectiveMessage(): ?Message
+    protected function getEffectiveMessage(Update $update): ?Message
     {
-        if (! method_exists($this, 'getUpdate')) {
-            return null;
-        }
-
-        $update = $this->getUpdate();
-
-        if (! $update instanceof Update) {
-            return null;
-        }
-
-        $data = $update->getRawData();
-        $message = $data['edited_channel_post']
-            ?? $data['channel_post']
-            ?? $data['callback_query']['message']
-            ?? $data['edited_message']
-            ?? $data['message']
+        $message = $update->edited_channel_post
+            ?? $update->channel_post
+            ?? $update->callback_query['message']
+            ?? $update->edited_message
+            ?? $update->message
             ?? null;
 
         return $message ? new Message($message) : null;

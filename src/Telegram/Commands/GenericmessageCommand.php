@@ -25,8 +25,8 @@ class GenericmessageCommand extends SystemCommand
             return $return;
         }
 
-        $user = $this->getEffectiveUser();
-        $chat = $this->getEffectiveChat();
+        $user = $this->getEffectiveUser($this->getUpdate());
+        $chat = $this->getEffectiveChat($this->getUpdate());
 
         // Check Conversation
         $conversation = new Conversation(

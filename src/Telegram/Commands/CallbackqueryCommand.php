@@ -40,8 +40,8 @@ class CallbackqueryCommand extends SystemCommand
         }
 
         // Check if conversation is active
-        $user = $this->getEffectiveUser();
-        $chat = $this->getEffectiveChat();
+        $user = $this->getEffectiveUser($this->getUpdate());
+        $chat = $this->getEffectiveChat($this->getUpdate());
 
         $conversation = new Conversation(
             user_id: $user->getId(),

@@ -1,6 +1,6 @@
 <?php
 
-Route::post('/api/telegram/{token}', static function (\Longman\TelegramBot\Telegram $bot, $token) {
+Route::post('/api/telegram/webhook/{token}', static function (\Longman\TelegramBot\Telegram $bot, $token) {
     if ($token != config('telegram.bot.api_token')) {
         abort(400);
     }

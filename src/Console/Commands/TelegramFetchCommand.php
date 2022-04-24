@@ -5,6 +5,7 @@ namespace Tii\LaravelTelegramBot\Console\Commands;
 
 
 use Illuminate\Console\Command;
+use Longman\TelegramBot\Entities\Update;
 use Longman\TelegramBot\Exception\TelegramException;
 use Longman\TelegramBot\Telegram;
 use Symfony\Component\Console\Command\SignalableCommandInterface;
@@ -12,32 +13,58 @@ use Symfony\Component\Console\Command\SignalableCommandInterface;
 class TelegramFetchCommand extends Command implements SignalableCommandInterface
 {
 
-    protected $signature = 'telegram:fetch';
+    protected $signature = 'telegram:fetch
+                            {--a|all-update-types : Explicitly allow all updates (including "chat_member")}
+                            {--allowed-updates= : Define allowed updates (comma-seperated)}';
 
     protected $description = 'Fetches Telegram updates periodically';
 
     protected bool $shallExit = false;
+
+    protected ?int $childPid = null;
 
     public function handle(Telegram $bot)
     {
         $this->callSilent('telegram:delete-webhook');
 
         $options = [
-            'timeout' => 5
+            'timeout' => 30
         ];
 
-        $this->info("Start fetching updates...\n<comment>(Exit with Ctrl + C. This can take a few seconds.)</comment>");
-        while (true) {
-            if ($this->shallExit) {
-                break;
+        // allowed_updates
+        if ($this->option('all-update-types')) {
+            $options['allowed_updates'] = Update::getUpdateTypes();
+        } elseif ($allowedUpdates = $this->option('allowed-updates')) {
+            $options['allowed_updates'] = str($allowedUpdates)->explode(',');
+        }
+
+        $this->info("Start fetching updates...\n<comment>(Exit with Ctrl + C.)</comment>");
+
+        if ($this->childPid = pcntl_fork()) {
+            // Parent process
+
+            while (true) {
+
+                if ($this->shallExit) {
+                    exec('kill -9 ' . $this->childPid);
+                    break;
+                }
+
             }
 
-            try {
-                $bot->handleGetUpdates($options);
-            } catch (TelegramException $e) {
-                // Only print message
-                $this->error($e->getMessage());
+        } else {
+            // Child process
+
+            while (true) {
+
+                $response = rescue(fn() => $bot->handleGetUpdates($options));
+
+                if ($response !== null && ! $response->isOk()) {
+                    $this->error($response->getDescription());
+                }
+
             }
+
         }
     }
 

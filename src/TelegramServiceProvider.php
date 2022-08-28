@@ -56,7 +56,6 @@ class TelegramServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->mergeConfigFrom(__DIR__ . '/../config/telegram.php', 'telegram');
-        $this->mergeConfigFrom(__DIR__ . '/../config/expose.php', 'expose');
 
         $this->configureTelegramBot();
     }

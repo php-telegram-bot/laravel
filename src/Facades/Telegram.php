@@ -1,9 +1,9 @@
 <?php
 
-namespace Tii\LaravelTelegramBot\Facades;
+namespace PhpTelegramBot\Laravel\Facades;
 
 use Illuminate\Support\Facades\Facade;
-use Tii\LaravelTelegramBot\LaravelTelegramBot;
+use PhpTelegramBot\Laravel\LaravelTelegramBot;
 
 class Telegram extends Facade
 {

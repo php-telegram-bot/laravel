@@ -1,13 +1,13 @@
 <?php
 
 
-namespace Tii\LaravelTelegramBot\Telegram\Conversation;
+namespace PhpTelegramBot\Laravel\Telegram\Conversation;
 
 use Longman\TelegramBot\Entities\Update;
 
 /**
  * Trait LeadsConversation
- * @package Tii\LaravelTelegramBot
+ * @package PhpTelegramBot\Laravel
  * @method Update getUpdate()
  * @method string getName()
  */

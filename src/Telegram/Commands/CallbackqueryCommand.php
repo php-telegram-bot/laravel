@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Tii\LaravelTelegramBot\Telegram\Commands;
+namespace PhpTelegramBot\Laravel\Telegram\Commands;
 
 
 use Illuminate\Support\Facades\App;
@@ -10,10 +10,10 @@ use Longman\TelegramBot\Commands\SystemCommand;
 use Longman\TelegramBot\Conversation;
 use Longman\TelegramBot\Entities\ServerResponse;
 use Longman\TelegramBot\Request;
-use Tii\LaravelTelegramBot\Facades\Telegram;
-use Tii\LaravelTelegramBot\Telegram\Conversation\ConversationWrapper;
-use Tii\LaravelTelegramBot\Telegram\InlineKeyboardButton\RemembersCallbackPayload;
-use Tii\LaravelTelegramBot\Telegram\UsesEffectiveEntities;
+use PhpTelegramBot\Laravel\Facades\Telegram;
+use PhpTelegramBot\Laravel\Telegram\Conversation\ConversationWrapper;
+use PhpTelegramBot\Laravel\Telegram\InlineKeyboardButton\RemembersCallbackPayload;
+use PhpTelegramBot\Laravel\Telegram\UsesEffectiveEntities;
 
 class CallbackqueryCommand extends SystemCommand
 {

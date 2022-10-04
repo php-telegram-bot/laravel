@@ -1,6 +1,6 @@
 <?php
 
-namespace Tii\LaravelTelegramBot;
+namespace PhpTelegramBot\Laravel;
 
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\File;
@@ -9,18 +9,17 @@ use Longman\TelegramBot\Commands\Command;
 use Longman\TelegramBot\Request;
 use Longman\TelegramBot\Telegram;
 use Symfony\Component\Finder\Finder;
-use Tii\LaravelTelegramBot\Console\Commands\TelegramCloseCommand;
-use Tii\LaravelTelegramBot\Console\Commands\TelegramDeleteWebhookCommand;
-use Tii\LaravelTelegramBot\Console\Commands\TelegramFetchCommand;
-use Tii\LaravelTelegramBot\Console\Commands\TelegramLogoutCommand;
-use Tii\LaravelTelegramBot\Console\Commands\TelegramPublishCommand;
-use Tii\LaravelTelegramBot\Console\Commands\TelegramSetWebhookCommand;
-use Tii\LaravelTelegramBot\Console\Commands\TelegramTunnelCommand;
-use Tii\LaravelTelegramBot\Console\Commands\MakeTelegramCommand;
-use Tii\LaravelTelegramBot\Factories\CallbackButton;
-use Tii\LaravelTelegramBot\Http\Middleware\TrustTelegramNetwork;
-use Tii\LaravelTelegramBot\Telegram\Commands\CallbackqueryCommand;
-use Tii\LaravelTelegramBot\Telegram\Commands\GenericmessageCommand;
+use PhpTelegramBot\Laravel\Console\Commands\TelegramCloseCommand;
+use PhpTelegramBot\Laravel\Console\Commands\TelegramDeleteWebhookCommand;
+use PhpTelegramBot\Laravel\Console\Commands\TelegramFetchCommand;
+use PhpTelegramBot\Laravel\Console\Commands\TelegramLogoutCommand;
+use PhpTelegramBot\Laravel\Console\Commands\TelegramPublishCommand;
+use PhpTelegramBot\Laravel\Console\Commands\TelegramSetWebhookCommand;
+use PhpTelegramBot\Laravel\Console\Commands\MakeTelegramCommand;
+use PhpTelegramBot\Laravel\Factories\CallbackButton;
+use PhpTelegramBot\Laravel\Http\Middleware\TrustTelegramNetwork;
+use PhpTelegramBot\Laravel\Telegram\Commands\CallbackqueryCommand;
+use PhpTelegramBot\Laravel\Telegram\Commands\GenericmessageCommand;
 
 class TelegramServiceProvider extends ServiceProvider
 {
@@ -117,7 +116,6 @@ class TelegramServiceProvider extends ServiceProvider
             TelegramLogoutCommand::class,
             TelegramPublishCommand::class,
             TelegramSetWebhookCommand::class,
-            TelegramTunnelCommand::class,
         ]);
     }
 

@@ -1,5 +1,5 @@
 {
-    "name": "tii/laravel-telegram-bot",
+    "name": "php-telegram-bot/laravel",
     "description": "Integrates PHP Telegram Bot into Laravel.",
     "license": "MIT",
     "authors": [
@@ -8,11 +8,11 @@
             "email": "mail@tii.one"
         }
     ],
-    "homepage": "https://github.com/tii/laravel-telegram-bot",
+    "homepage": "https://github.com/php-telegram-bot/laravel",
     "keywords": ["laravel", "telegram", "bot"],
     "require": {
         "illuminate/support": "~7|~8|~9",
-        "longman/telegram-bot": "^0.77",
+        "longman/telegram-bot": "^0.79",
         "ext-pcntl": "*"
     },
     "require-dev": {
@@ -21,22 +21,17 @@
     },
     "autoload": {
         "psr-4": {
-            "Tii\\LaravelTelegramBot\\": "src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Tii\\LaravelTelegramBot\\Tests\\": "tests"
+            "PhpTelegramBot\\Laravel\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-              "Tii\\LaravelTelegramBot\\TelegramServiceProvider"
+              "PhpTelegramBot\\Laravel\\TelegramServiceProvider"
             ],
             "aliases": {
-                "CallbackButton": "Tii\\LaravelTelegramBot\\Facades\\CallbackButton",
-                "Telegram": "Tii\\LaravelTelegramBot\\Facades\\Telegram"
+                "CallbackButton": "PhpTelegramBot\\Laravel\\Facades\\CallbackButton",
+                "Telegram": "PhpTelegramBot\\Laravel\\Facades\\Telegram"
             }
         }
     }

@@ -1,14 +1,14 @@
 <?php
 
-namespace Tii\LaravelTelegramBot\Telegram\Commands;
+namespace PhpTelegramBot\Laravel\Telegram\Commands;
 
 use Longman\TelegramBot\Commands\SystemCommand;
 use Longman\TelegramBot\Conversation;
 use Longman\TelegramBot\Entities\ServerResponse;
 use Longman\TelegramBot\Request;
-use Tii\LaravelTelegramBot\Facades\Telegram;
-use Tii\LaravelTelegramBot\Telegram\Conversation\ConversationWrapper;
-use Tii\LaravelTelegramBot\Telegram\UsesEffectiveEntities;
+use PhpTelegramBot\Laravel\Facades\Telegram;
+use PhpTelegramBot\Laravel\Telegram\Conversation\ConversationWrapper;
+use PhpTelegramBot\Laravel\Telegram\UsesEffectiveEntities;
 
 class GenericmessageCommand extends SystemCommand
 {

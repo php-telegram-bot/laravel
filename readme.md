@@ -12,7 +12,7 @@ This is where your description should go. Take a look at [contributing.md](contr
 Via Composer
 
 ``` bash
-$ composer require tii/laravel-telegram-bot
+$ composer require php-telegram-bot/laravel
 ```
 
 ## Usage

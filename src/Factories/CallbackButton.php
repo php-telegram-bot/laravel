@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Tii\LaravelTelegramBot\Factories;
+namespace PhpTelegramBot\Laravel\Factories;
 
 
 use Illuminate\Support\Facades\Cache;

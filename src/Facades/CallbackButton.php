@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Tii\LaravelTelegramBot\Facades;
+namespace PhpTelegramBot\Laravel\Facades;
 
 
 use Illuminate\Support\Facades\Facade;
@@ -10,6 +10,6 @@ class CallbackButton extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        return \Tii\LaravelTelegramBot\Factories\CallbackButton::class;
+        return \PhpTelegramBot\Laravel\Factories\CallbackButton::class;
     }
 }

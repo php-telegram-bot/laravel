@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Tii\LaravelTelegramBot\Console\Commands;
+namespace PhpTelegramBot\Laravel\Console\Commands;
 
 
 use Illuminate\Console\Command;

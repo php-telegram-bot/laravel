@@ -1,6 +1,6 @@
 <?php
 
-namespace Tii\LaravelTelegramBot\Telegram\InlineKeyboardButton;
+namespace PhpTelegramBot\Laravel\Telegram\InlineKeyboardButton;
 
 
 use Illuminate\Support\Facades\Cache;
@@ -9,7 +9,7 @@ use Longman\TelegramBot\Entities\Update;
 
 /**
  * Trait CallbackQueryCache
- * @package Tii\LaravelTelegramBot\Services
+ * @package PhpTelegramBot\Laravel\Services
  * @method Update getUpdate()
  */
 trait RemembersCallbackPayload

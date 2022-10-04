@@ -1,6 +1,6 @@
 <?php
 
-namespace Tii\LaravelTelegramBot;
+namespace PhpTelegramBot\Laravel;
 
 use Longman\TelegramBot\Entities\ServerResponse;
 use Longman\TelegramBot\Entities\Update;

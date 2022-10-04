@@ -1,6 +1,6 @@
 <?php
 
-namespace Tii\LaravelTelegramBot\Http\Middleware;
+namespace PhpTelegramBot\Laravel\Http\Middleware;
 
 use Closure;
 use Illuminate\Support\Facades\App;

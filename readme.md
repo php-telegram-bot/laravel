@@ -23,8 +23,8 @@ $ composer require php-telegram-bot/laravel
 
 Please see the [license file](license.md) for more information.
 
-[ico-version]: https://img.shields.io/packagist/v/tii/laravel-telegram-bot.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/tii/laravel-telegram-bot.svg?style=flat-square
+[ico-version]: https://img.shields.io/packagist/v/php-telegram-bot/laravel.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/php-telegram-bot/laravel.svg?style=flat-square
 
 [link-packagist]: https://packagist.org/packages/php-telegram-bot/laravel
 [link-downloads]: https://packagist.org/packages/php-telegram-bot/laravel

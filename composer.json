@@ -4,8 +4,15 @@
     "license": "MIT",
     "authors": [
         {
+            "name": "Avtandil Kikabidze aka LONGMAN",
+            "email": "akalongman@gmail.com",
+            "homepage": "http://longman.me",
+            "role": "Maintainer, Developer"
+        },
+        {
             "name": "Tii",
-            "email": "mail@tii.one"
+            "email": "mail@tii.one",
+            "role": "Developer"
         }
     ],
     "homepage": "https://github.com/php-telegram-bot/laravel",

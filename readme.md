@@ -4,11 +4,21 @@
 [![Total Downloads][ico-downloads]][link-downloads]
 
 ## Installation
+Run this commands in your project's terminal:
 
-Install this package through Composer. Run this command in your project's terminal:
-
+Install this package through Composer:
 ``` bash
 composer require php-telegram-bot/laravel
+```
+
+Publish `config/telegram.php` file:
+``` bash
+php artisan vendor:publish --tag=telegram-config
+```
+
+Publish `routes/telegram.php` file:
+``` bash
+php artisan vendor:publish --tag=telegram-routes
 ```
 ## Usage
 For further basic configuration of this Laravel package you do not need to create any configuration files.

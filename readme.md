@@ -12,6 +12,11 @@ composer require php-telegram-bot/laravel
 ```
 ## Usage
 For further basic configuration of this Laravel package you do not need to create any configuration files.
+You need to define env variables:
+- TELEGRAM_API_TOKEN - bot token gave by BotFather
+- TELEGRAM_SECRET_TOKEN - for url check to avoid unauthorized access
+- TELEGRAM_BOT_USERNAME - bot name without @
+- TELEGRAM_ADMINS - comma separated list of chatid's
 
 Artisan terminal commands for the Webhook usage (remember, that you need an HTTPS server for it):
 ``` bash

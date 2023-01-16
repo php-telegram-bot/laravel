@@ -39,7 +39,7 @@ class TrustTelegramNetwork
      */
     public function handle($request, Closure $next)
     {
-        if (App::environment('local') && IpUtils::checkIp($request->ip(), $this->localIpNets)) {
+        if (App::environment(['local','dev','development']) && IpUtils::checkIp($request->ip(), $this->localIpNets)) {
             return $next($request);
         }
 

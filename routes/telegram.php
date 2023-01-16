@@ -1,7 +1,7 @@
 <?php
 
 Route::post('/api/telegram/webhook/{token}', static function (\Longman\TelegramBot\Telegram $bot, $token) {
-    if ($token != config('telegram.bot.api_token')) {
+    if ($token != config('telegram.bot.secret_token')) {
         abort(400);
     }
 

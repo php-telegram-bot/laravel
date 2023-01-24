@@ -44,7 +44,7 @@ class TelegramSetWebhookCommand extends Command
         if ($this->option('all-update-types')) {
             $options['allowed_updates'] = Update::getUpdateTypes();
         } elseif ($allowedUpdates = $this->option('allowed-updates')) {
-            $options['allowed_updates'] = str($allowedUpdates)->explode(',');
+            $options['allowed_updates'] = Str::of($allowedUpdates)->explode(',');
         }
 
         $response = $bot->setWebhook($url, $options);

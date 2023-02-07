@@ -17,6 +17,12 @@ abstract class GeneratorCommand extends Command
             return false;
         }
 
+        $path_parts = pathinfo($destination);
+        if (!mkdir($path_parts['dirname'], 0755, true)) {
+            $this->error("{$$path_parts['dirname']} failed to create!");
+            return false;
+        }
+
         $content = file_get_contents($source);
         $content = $this->replacePlaceholder($content, $replacements);
         file_put_contents($destination, $content);

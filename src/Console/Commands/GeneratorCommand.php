@@ -19,7 +19,7 @@ abstract class GeneratorCommand extends Command
 
         $path_parts = pathinfo($destination);
         if (!mkdir($path_parts['dirname'], 0755, true)) {
-            $this->error("{$$path_parts['dirname']} failed to create!");
+            $this->error("{$destination} failed to create!");
             return false;
         }
 

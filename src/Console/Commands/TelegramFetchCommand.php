@@ -5,6 +5,7 @@ namespace PhpTelegramBot\Laravel\Console\Commands;
 
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Str;
 use Longman\TelegramBot\Entities\Update;
 use Longman\TelegramBot\Exception\TelegramException;
 use Longman\TelegramBot\Telegram;
@@ -35,7 +36,7 @@ class TelegramFetchCommand extends Command implements SignalableCommandInterface
         if ($this->option('all-update-types')) {
             $options['allowed_updates'] = Update::getUpdateTypes();
         } elseif ($allowedUpdates = $this->option('allowed-updates')) {
-            $options['allowed_updates'] = str($allowedUpdates)->explode(',');
+            $options['allowed_updates'] = Str::of($allowedUpdates)->explode(',');
         }
 
         $this->info("Start fetching updates...\n<comment>(Exit with Ctrl + C.)</comment>");

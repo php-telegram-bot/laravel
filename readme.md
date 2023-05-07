@@ -10,6 +10,38 @@ Install this package through Composer. Run this command in your project's termin
 ``` bash
 composer require php-telegram-bot/laravel
 ```
+
+Execute the following command to publish the folder structure to your Laravel application:
+```bash
+php artisan telegram:publish
+```
+This also includes a dummy `/start` command to give you a quick start.
+
+Since we're using the database part of php-telegram-bot you should run the migrations so the database schema gets installed:
+```bash
+php artisan migrate
+```
+
+And add the following lines to your .env file:
+```dotenv
+TELEGRAM_API_TOKEN=
+TELEGRAM_BOT_USERNAME=
+TELEGRAM_API_URL=
+TELEGRAM_ADMINS=
+```
+
+`TELEGRAM_API_TOKEN` and `TELEGRAM_BOT_USERNAME` should be filled with the corresponding data from [@BotFather](https://t.me/BotFather)
+
+`TELEGRAM_API_URL` is optional and can be filled with the URL to your  [custom Bot API Server](https://core.telegram.org/bots/api#using-a-local-bot-api-server) if you want to use one.
+
+`TELEGRAM_ADMINS` is optional and a comma-separated list of Telegram User IDs that gets passed to the `enableAdmins` command of php-telegram-bot to enable admin commands for those users.
+
+After that you can run `php artisan telegram:set-webhook` if your development server is reachable from the outside or you're using a custom bot api server. 
+
+Or `php artisan telegram:fetch` to start fetching your updates via polling.
+
+⚠️ Be aware that you have to cancel and restart the `telegram:fetch` command, if you change your code.
+
 ## Usage
 For further basic configuration of this Laravel package you do not need to create any configuration files.
 

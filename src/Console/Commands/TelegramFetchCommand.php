@@ -39,7 +39,7 @@ class TelegramFetchCommand extends Command implements SignalableCommandInterface
             $options['allowed_updates'] = Str::of($allowedUpdates)->explode(',');
         }
 
-        $this->info("Start fetching updates...\n<comment>(Exit with Ctrl + C.)</comment>");
+        $this->info("Start fetching updates...\n<comment>(Exit with Ctrl + C)</comment>");
 
         if ($this->childPid = pcntl_fork()) {
             // Parent process

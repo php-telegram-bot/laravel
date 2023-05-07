@@ -18,8 +18,8 @@
     "homepage": "https://github.com/php-telegram-bot/laravel",
     "keywords": ["laravel", "telegram", "bot"],
     "require": {
-        "illuminate/support": "~7|~8|~9",
-        "longman/telegram-bot": "^0.80",
+        "illuminate/support": "~7|~8|~9|~10",
+        "longman/telegram-bot": "^0.81",
         "ext-pcntl": "*"
     },
     "require-dev": {
@@ -32,6 +32,9 @@
         }
     },
     "extra": {
+        "branch-alias": {
+            "dev-main": "2.1.x-dev"
+        },
         "laravel": {
             "providers": [
               "PhpTelegramBot\\Laravel\\TelegramServiceProvider"
@@ -41,5 +44,7 @@
                 "Telegram": "PhpTelegramBot\\Laravel\\Facades\\Telegram"
             }
         }
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
     public function up()
@@ -10,6 +12,8 @@ return new class extends Migration {
 
     public function down()
     {
-        //
+        Schema::disableForeignKeyConstraints();
+        Schema::dropIfExists('bot_chat_join_request');
+        Schema::enableForeignKeyConstraints();
     }
 };
